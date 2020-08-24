@@ -1,6 +1,6 @@
 # Vim configuration
 
-Vim environment and configuration using neovim.
+Vim environment and configuration using neovim, based on the config by [ChristianChiarulli](https://github.com/ChristianChiarulli/nvim).
 
 ## Easy install
 
@@ -28,41 +28,29 @@ bash <(curl -s https://raw.githubusercontent.com/jeffmm/nvim/master/utils/instal
   sudo apt install neovim
   ```
 
-- Arch
-
-  ```
-  sudo pacman -S neovim
-  ```
-
 ### Clone this repo to your config folder
 
 ```
 git clone https://github.com/jeffmm/nvim.git ~/.config/nvim
 ```
 
-## Install python & node support
+### Install python & node support
 
 ```
 pip install pynvim
-```
-
-```
 npm i -g neovim
 ```
 
-## Install neovim-remote
-
-```
-pip install neovim-remote
-```
+### Install neovim-remote
 
 This will install `nvr` to `~/.local/bin` so you will need to add the following to your `bashrc` or `zshrc`
 
 ```
+pip install neovim-remote
 export PATH=$HOME/.local/bin:$PATH
 ```
 
-## Install clipboard support
+### Install clipboard support
 
 - On mac pbcopy should be builtin
 
@@ -72,13 +60,7 @@ export PATH=$HOME/.local/bin:$PATH
   sudo apt install xsel
   ```
 
-- On Arch Linux
-
-  ```
-  sudo pacman -S xsel
-  ```
-
-## Install python & node support using virtual environments
+### Install python & node support using virtual environments
 
 Make sure to add these paths somewhere in your config
 
@@ -87,25 +69,25 @@ let g:python3_host_prog = expand("<path to python with pynvim installed>")
 let g:node_host_prog = expand("<path to node with neovim installed>")
 ```
 
-## List of programs you should install
+### List of useful programs you should install
 
 - ranger
 - ueberzug (if not on mac)
 - ripgrep
-- silver_searcher
+- the_silver_searcher
 - fd
 - universal-ctags
-- lazy git
-- lazy docker
+- lazygit
+- lazydocker
 
 Explanations and installation instruction can be found on my blog
 
-## For FAR to work
+### FAR config
 ```
 :UpdateRemotePlugins
 ```
 
-## Vim Gists
+### Gists config
 
 To use **vim-gists** you will need to configure the following:
 
