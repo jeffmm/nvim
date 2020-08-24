@@ -41,6 +41,10 @@ set guifont=Hack\ Nerd\ Font\ Mono
 set iskeyword+=-                      	" treat dash separated words as a word text object
 autocmd FileType * setlocal formatoptions-=cor  " Properly wrap comments
 
+if has('python3')
+    set pyx=3
+endif
+
 "Turn spellcheck on for markdown files
 augroup auto_spellcheck
   autocmd BufNewFile,BufRead *.md setlocal spell
