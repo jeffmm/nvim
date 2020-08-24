@@ -4,19 +4,32 @@ Vim environment and configuration using neovim, based on the config by [Christia
 
 ## Easy install
 
-The following will install this config if you have an existing config it will move it to `~/.config/nvim.old`
+The following one-liner will install the config---if you have an existing config it will move it to `~/.config/nvim.old`
 
-This script only supports Mac, Ubuntu and Arch
+This script only supports Mac and Ubuntu
 
 ```
 bash <(curl -s https://raw.githubusercontent.com/jeffmm/nvim/master/utils/install.sh)
 ```
+## Dependencies and useful programs to install
 
-## Manual install
+Use `:checkhealth` in a running instance of nvim to ensure everything is installed correctly
+
+- python3
+- neovim
+- node
+- ranger (`pip install ranger-fm`)
+- ueberzug (if not on mac)
+- ripgrep
+- the_silver_searcher
+- fd
+- universal-ctags
+- lazygit
+- lazydocker
 
 ### Install Neovim
 
-- On Mac
+- Mac
 
   ```
   brew install neovim
@@ -52,15 +65,17 @@ export PATH=$HOME/.local/bin:$PATH
 
 ### Install clipboard support
 
-- On mac pbcopy should be builtin
+- Mac
 
-- On Ubuntu
+  pbcopy should be builtin
+
+- Ubuntu
 
   ```
   sudo apt install xsel
   ```
 
-### Install python & node support using virtual environments
+### Install python & node support from your existing environment (optional)
 
 Make sure to add these paths somewhere in your config
 
@@ -68,19 +83,6 @@ Make sure to add these paths somewhere in your config
 let g:python3_host_prog = expand("<path to python with pynvim installed>")
 let g:node_host_prog = expand("<path to node with neovim installed>")
 ```
-
-### List of useful programs you should install
-
-- ranger
-- ueberzug (if not on mac)
-- ripgrep
-- the_silver_searcher
-- fd
-- universal-ctags
-- lazygit
-- lazydocker
-
-Explanations and installation instruction can be found on my blog
 
 ### FAR config
 ```
