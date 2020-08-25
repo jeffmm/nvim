@@ -32,6 +32,7 @@ source $HOME/.config/nvim/plug-config/polyglot.vim
 source $HOME/.config/nvim/plug-config/far.vim
 source $HOME/.config/nvim/plug-config/window-swap.vim
 source $HOME/.config/nvim/plug-config/markdown-preview.vim
+source $HOME/.config/nvim/plug-config/gpg.vim
 
 " Add paths to node and python here
 if !empty(glob("~/.config/nvim/paths.vim"))
