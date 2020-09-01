@@ -33,8 +33,9 @@ function! StartifyEntryFormat()
 
 let g:startify_bookmarks = [
             \ { '.': '~/.config/nvim/init.vim' },
+            \ { 'p': '~/Projects' },
             \ { 'a': '~/.bash_aliases' },
-            \ { 'p': '~/.bash_profile' },
+            \ { 'b': '~/.bash_profile' },
             \ { 'w': '~/.vim/wiki/notebook/index.md.asc' },
             \ { 'W': '~/.vim/wiki/journal/index.md.asc' },
             \ ]
