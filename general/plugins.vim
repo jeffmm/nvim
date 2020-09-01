@@ -75,8 +75,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'mattn/vim-gist'
   " Easily delete buffers
   Plug 'moll/vim-bbye'
-  " Encryption
-  Plug 'jamessan/vim-gnupg'
 
   call plug#end()
 
