@@ -35,8 +35,8 @@ let g:startify_bookmarks = [
             \ { '.': '~/.config/nvim/init.vim' },
             \ { 'a': '~/.bash_aliases' },
             \ { 'p': '~/.bash_profile' },
-            \ { 'w': '~/.config/nvim/vimwiki/notebook/index.md.asc' },
-            \ { 'W': '~/.config/nvim/vimwiki/private/index.md.asc' },
+            \ { 'w': '~/.vim/wiki/notebook/index.md.asc' },
+            \ { 'W': '~/.vim/wiki/journal/index.md.asc' },
             \ ]
 
 let g:startify_enable_special = 0

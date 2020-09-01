@@ -19,6 +19,7 @@ Use `:checkhealth` in a running instance of nvim to ensure everything is install
 - neovim
 - node
 - ranger (`pip install ranger-fm`)
+- fzf
 - ueberzug (if not on mac)
 - ripgrep
 - the_silver_searcher

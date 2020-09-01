@@ -16,11 +16,11 @@
 " Filetypes enabled for
 let g:vimwiki_filetypes = ['markdown']
 
-let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/notebook', 
+let g:vimwiki_list = [{'path': '~/.vim/wiki/notebook', 
             \ 'links_space_char': '_',
             \ 'syntax': 'markdown',
             \ 'ext': '.md.asc'},
-            \ {'path': '~/.config/nvim/vimwiki/private',
+            \ {'path': '~/.vim/wiki/journal',
             \ 'links_space_char': '_',
             \ 'syntax': 'markdown',
             \ 'ext': '.md.asc'}]
