@@ -18,6 +18,14 @@ augroup auto_encrypt
     autocmd BufReadPost,FileReadPost    *.gpg,*.asc set nobin
     autocmd BufReadPost,FileReadPost    *.gpg,*.asc let &ch = ch_save|unlet ch_save
     autocmd BufReadPost,FileReadPost    *.gpg,*.asc execute ":doautocmd BufReadPost " . expand("%:r")
+    " Options for encrypted markdown files  (wiki)
+    autocmd BufReadPost,FileReadPost *.md.asc setlocal spell wrap linebreak
+    autocmd BufReadPost,FileReadPost *.md.asc :CocDisable
+    " autocmd BufReadPost,FileReadPost *.md.asc :Goyo
+    autocmd BufReadPost,FileReadPost *.md.asc nmap j gj
+    autocmd BufReadPost,FileReadPost *.md.asc nmap k gk
+    autocmd BufReadPost,FileReadPost *.md.asc xmap j gj
+    autocmd BufReadPost,FileReadPost *.md.asc xmap k gk
     " Convert all text to encrypted text before writing
     autocmd BufWritePre,FileWritePre    *.gpg,*.asc set bin
     autocmd BufWritePre,FileWritePre    *.gpg,*.asc let shsave=&sh

@@ -1,4 +1,4 @@
-let g:polyglot_disabled = ['csv']
+" let g:polyglot_disabled = ['csv', 'md']
 
 let g:python_highlight_all=1
 

@@ -47,7 +47,13 @@ endif
 
 "Turn spellcheck on for markdown files
 augroup auto_spellcheck
-    autocmd BufNewFile,BufRead *.md setlocal spell
+   autocmd!
+   autocmd BufNewFile,BufRead *.md setlocal spell wrap linebreak
+   autocmd BufNewFile,BufRead *.md :CocDisable
+   autocmd BufNewFile,BufRead *.md nmap j gj
+   autocmd BufNewFile,BufRead *.md nmap k gk
+   autocmd BufNewFile,BufRead *.md xmap j gj
+   autocmd BufNewFile,BufRead *.md xmap k gk
 augroup END
 
 " Highlight search results only while searching

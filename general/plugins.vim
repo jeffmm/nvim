@@ -20,6 +20,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Plug 'justinmk/vim-sneak'
   Plug 'easymotion/vim-easymotion'
   " Better Syntax Support
+  let g:polyglot_disabled = ['csv']
+
   Plug 'sheerun/vim-polyglot'
   " Cool Icons
   Plug 'ryanoasis/vim-devicons'
