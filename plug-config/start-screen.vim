@@ -36,7 +36,7 @@ let g:startify_bookmarks = [
             \ { 'p': '~/Projects' },
             \ { 'a': '~/.bash_aliases' },
             \ { 'b': '~/.bash_profile' },
-            \ { 'w': '~/.vim/wiki/notebook/index.md.asc' },
+            \ { 'w': '~/.vim/wiki/notebook/index.md' },
             \ { 'W': '~/.vim/wiki/journal/index.md.asc' },
             \ ]
 

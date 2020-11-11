@@ -1,20 +1,9 @@
 " Basic Key Mappings
 
-imap <C-h> <C-w>h
-" imap <C-j> <C-w>j
-" imap <C-k> <C-w>k
-imap <C-l> <C-w>l
-" nnoremap J <C-f>
-" nnoremap K <C-b>
-nnoremap L $
-nnoremap H ^
-" xnoremap J <C-f>
-" xnoremap K <C-b>
-xnoremap L $
-xnoremap H ^
-
-vnoremap J 5gj
-vnoremap K 5gk
+nnoremap <C-l> $
+nnoremap <C-h> ^
+xnoremap <C-l> $
+xnoremap <C-h> ^
 
 " Leader key
 let mapleader=" "
@@ -25,10 +14,6 @@ nnoremap <Space> <Nop>
 " Better indenting
 vnoremap < <gv
 vnoremap > >gv
-
-" Easy CAPS
-" inoremap <c-u> <ESC>viwUi
-" nnoremap <c-u> viwU<Esc>
 
 " TAB in general mode will move to text buffer
 nnoremap <silent> <TAB> :bnext<CR>
@@ -50,28 +35,17 @@ xnoremap <silent> <C-c> <Esc>
 inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Terminal window navigation
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-tnoremap <Esc> <C-\><C-n>
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Use alt + hjkl to resize windows
 nnoremap <silent> <M-j>    :resize -2<CR>
 nnoremap <silent> <M-k>    :resize +2<CR>
 nnoremap <silent> <M-h>    :vertical resize -2<CR>
 nnoremap <silent> <M-l>    :vertical resize +2<CR>
-
 " Better nav for omnicomplete
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
+" inoremap <expr> <c-j> ("\<C-n>")
+" inoremap <expr> <c-k> ("\<C-p>")
+

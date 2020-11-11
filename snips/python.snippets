@@ -1,0 +1,43 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet " "Docstring header"
+"""${1:TODO - Docstring.}"""
+$0
+endsnippet
+
+snippet def "Function definition with typing" b
+def ${1:function}($2${2/[a-zA-Z].*/: /}${3:${2/[a-zA-Z].*/arg_type/}}) -> ${4:return_type}:
+	"""${5:TODO - Short description for $1.}
+
+	${6:TODO - Long description for $1.}${2/[a-zA-Z].*/\n\n    Args:\n        $0: /}${7:${2/[a-zA-Z].*/TODO - Description for $0./}}
+
+	Returns:
+		${8:TODO - Description of returned variable.}
+
+	"""
+	$0
+endsnippet

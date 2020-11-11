@@ -38,14 +38,13 @@ let g:which_key_map['='] = [ '<C-W>='                             , 'balance win
 let g:which_key_map['e'] = [ ':CocCommand explorer'               , 'explorer' ]
 " let g:which_key_map['f'] = [ ':Farr'                              , 'find and replace' ]
 let g:which_key_map['h'] = [ '<C-W>s'                             , 'split below']
+" let g:which_key_map['k'] = [ ':call <SID>show_documentation()<CR>'    , 'show documentation']
 let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'  , 'move window' ]
 let g:which_key_map['p'] = [ ':Files'                             , 'search files' ]
 let g:which_key_map['q'] = [ 'q'                                  , 'quit' ]
-let g:which_key_map['r'] = [ ':RnvimrToggle'                      , 'ranger' ]
+" let g:which_key_map['r'] = [ ':RnvimrToggle'                      , 'ranger' 
 let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
-let g:which_key_map['v'] = [ '<C-W>v'                             , 'split right']
-let g:which_key_map['W'] = [ 'w'                                  , 'write' ]
-let g:which_key_map['z'] = [ 'Goyo'                               , 'zen' ]
+let g:which_key_map['Z'] = [ 'Goyo'                               , 'zen' ]
 
 " Group mappings
 
@@ -84,13 +83,13 @@ let g:which_key_map.b = {
 
 " f is for find and replace
 let g:which_key_map.f = {
-      \ 'name' : '+find & replace' ,
+      \ 'name' : '+find&replace' ,
       \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
       \ 'p' : [':Farr --source=rgnvim'     , 'project'],
       \ }
 
 :command! InsertDate :normal "=strftime("## %Y%m%d %A")<CR>P
-:command! DocstringFull :normal o"""Short docstring<ENTER><ENTER>Extended Docstring<ENTER><ENTER>Args:<ENTER>var1 (type): Input variable<ENTER><Enter><C-D>Returns:<ENTER>(type): Returned variable<ENTER><ENTER><C-D>"""<ESC>
+:command! DocstringFull :normal o"""Short docstring<CR><CR>Extended Docstring<CR><CR>Args:<CR>var1 (type): Input variable<CR><Enter><C-D>Returns:<CR>(type): Returned variable<CR><CR><C-D>"""<ESC>
 :command! DocstringShort :normal o""""""<ESC>hhi
 let g:which_key_map.d = {
     \ 'name' : '+docstrings' ,
@@ -98,25 +97,7 @@ let g:which_key_map.d = {
     \ 'f'    : [':DocstringFull' , 'insert full docstring'],
     \ 's'    : [':DocstringShort', 'insert short docstring'],
     \ }
-
-" k is for task
-let g:which_key_map.k = {
-      \ 'name' : '+task' ,
-      \ 'c' : [':AsyncTask file-compile'      , 'compile file'],
-      \ 'b' : [':AsyncTask project-build'     , 'build project'],
-      \ 'e' : [':AsyncTaskEdit'               , 'edit local tasks'],
-      \ 'f' : [':AsyncTaskFzf'                , 'find task'],
-      \ 'g' : [':AsyncTaskEdit!'              , 'edit global tasks'],
-      \ 'h' : [':AsyncTaskList!'              , 'list hidden tasks'],
-      \ 'l' : [':CocList tasks'               , 'list tasks'],
-      \ 'm' : [':AsyncTaskMacro'              , 'macro help'],
-      \ 'o' : [':copen'                       , 'open task view'],
-      \ 'r' : [':AsyncTask file-run'          , 'run file'],
-      \ 'p' : [':AsyncTask project-run'       , 'run project'],
-      \ 'x' : [':cclose'                      , 'close task view'],
-      \ }
-      " \ 'l' : [':AsyncTaskList'               , 'list tasks'],
-
+"
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
@@ -203,26 +184,19 @@ let g:which_key_map.G = {
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ '.' : [':CocConfig'                          , 'config'],
-      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
-      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
-      \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
       \ 'B' : [':CocPrev'                            , 'prev action'],
-      \ 'c' : [':CocList commands'                   , 'commands'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
-      \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
-      \ 'e' : [':CocList extensions'                 , 'extensions'],
       \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
       \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
       \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
+      \ 'k' : [':call <SID>show_documentation()<CR>' , 'show documentation'],
       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
-      \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
-      \ 'O' : [':CocList outline'                    , 'outline'],
       \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
       \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
       \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
@@ -231,9 +205,8 @@ let g:which_key_map.l = {
       \ 's' : [':CocList -I symbols'                 , 'references'],
       \ 'S' : [':CocList snippets'                   , 'snippets'],
       \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
-      \ 'u' : [':CocListResume'                      , 'resume list'],
       \ 'U' : [':CocUpdate'                          , 'update CoC'],
-      \ 'v' : [':Vista!!'                            , 'tag viewer'],
+      \ 'x' : ['<Plug>(coc-convert-snippet)'         , 'convert snippet'],
       \ 'z' : [':CocDisable'                         , 'disable CoC'],
       \ 'Z' : [':CocEnable'                          , 'enable CoC'],
       \ }
@@ -241,7 +214,6 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
@@ -273,25 +245,36 @@ let g:which_key_map.T = {
       \ 'x' : [':XTabPinBuffer'           , 'pin buffer'],
       \ }
 
-" w is for wiki
-let g:which_key_map.w = {
+" w is for managing splits
+let g:which_key_map.w =  {
+      \ 'v' : [ '<C-w>v'                             , 'split vertical'],
+      \ 's' : [ '<C-w>s'                             , 'split horizontal'],
+      \ 'n' : [ '<C-w>n'                             , 'horizontal split to new file'],
+      \ 'l' : [ '<C-w>l'                             , 'move right'],
+      \ 'h' : [ '<C-w>h'                             , 'move left'],
+      \ 'k' : [ '<C-w>k'                             , 'move up'],
+      \ 'j' : [ '<C-w>j'                             , 'move down'],
+      \ 'J' : [ '<C-w>J'                             , 'move split to bottom'],
+      \ 'K' : [ '<C-w>K'                             , 'move split to top'],
+      \ 'H' : [ '<C-w>H'                             , 'move split to left'],
+      \ 'L' : [ '<C-w>L'                             , 'move split to right'],
+      \ 'q' : [ '<C-w>q'                             , 'close split'],
+      \ }
+"
+" z is for zettelkasten
+let g:which_key_map.z = {
       \ 'name' : '+wiki' ,
-      \ 'w' : ['<Plug>VimwikiIndex'                              , 'ncdu'],
-      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
-      \ 'j' : ['<plug>(wiki-journal)'                              , 'ncdu'],
-      \ 'R' : ['<plug>(wiki-reload)'                              , 'ncdu'],
-      \ 'c' : ['<plug>(wiki-code-run)'                              , 'ncdu'],
-      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'                              , 'ncdu'],
-      \ 'g' : ['<plug>(wiki-graph-in)'                              , 'ncdu'],
-      \ 'G' : ['<plug>(wiki-graph-out)'                              , 'ncdu'],
-      \ 'l' : ['<plug>(wiki-link-toggle)'                              , 'ncdu'],
-      \ 'd' : ['<plug>(wiki-page-delete)'                              , 'ncdu'],
-      \ 'r' : ['<plug>(wiki-page-rename)'                              , 'ncdu'],
-      \ 't' : ['<plug>(wiki-page-toc)'                              , 'ncdu'],
-      \ 'T' : ['<plug>(wiki-page-toc-local)'                              , 'ncdu'],
-      \ 'e' : ['<plug>(wiki-export)'                              , 'ncdu'],
-      \ 'u' : ['<plug>(wiki-list-uniq)'                              , 'ncdu'],
-      \ 'U' : ['<plug>(wiki-list-uniq-local)'                              , 'ncdu'],
+      \ 'z' : [':VimwikiIndex', 'notebook index'],
+      \ 'Z' : [':VimwikiIndex 2', 'journal index'],
+      \ 'b' : [':NVBacklinks' , 'find backlinks'],
+      \ 's' : [':NVSearchText', 'search notes'],
+      \ 'n' : [':ZettelCreateNew', 'new note'],
+      \ 't' : [':NVTags', 'search tags'],
+      \ 'i' : [':VimwikiCheckLinks', 'unlinked note inbox'],
+      \ 'y' : [':ZettelYankName', 'yank note link'],
+      \ 'I' : [':ZettelInsertNote', 'insert note'],
+      \ 'R' : [':VimwikiRenameFile', 'rename note'],
+      \ 'D' : [':VimwikiDeleteFile', 'delete note'],
       \ }
 
 " Global

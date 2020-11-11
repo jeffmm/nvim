@@ -1,3 +1,4 @@
 tags*
 autoload/plugged/*
 vimwiki/
+.netrwhist

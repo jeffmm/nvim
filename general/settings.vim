@@ -13,6 +13,7 @@ set splitright                          " Vertical splits will automatically be 
 set t_Co=256                            " Support 256 colors
 set conceallevel=0                      " So that I can see `` in markdown files
 set tabstop=4 softtabstop=4             " Insert 4 spaces for a tab
+set number
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter
 set expandtab                           " Converts tabs to spaces
@@ -21,7 +22,7 @@ set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set relativenumber                      " Line numbers
 set cursorline                          " Enable highlighting of the current line
-set background=light                    " tell vim what the background color looks like
+" set background=light                    " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
@@ -44,17 +45,6 @@ autocmd FileType * setlocal formatoptions-=cor  " Properly wrap comments
 if has('python3')
     set pyx=3
 endif
-
-"Turn spellcheck on for markdown files
-augroup auto_spellcheck
-   autocmd!
-   autocmd BufNewFile,BufRead *.md setlocal spell wrap linebreak
-   autocmd BufNewFile,BufRead *.md :CocDisable
-   autocmd BufNewFile,BufRead *.md nmap j gj
-   autocmd BufNewFile,BufRead *.md nmap k gk
-   autocmd BufNewFile,BufRead *.md xmap j gj
-   autocmd BufNewFile,BufRead *.md xmap k gk
-augroup END
 
 " Highlight search results only while searching
 augroup vimrc-incsearch-highlight

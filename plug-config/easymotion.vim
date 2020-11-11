@@ -10,8 +10,10 @@ nmap f <Plug>(easymotion-s2)
 xmap f <Plug>(easymotion-s2)
 vmap f <Plug>(easymotion-s2)
 
-map <C-j> <Plug>(easymotion-j)
-map <C-k> <Plug>(easymotion-k)
+map J <Plug>(easymotion-j)
+map K <Plug>(easymotion-k)
+map H <Plug>(easymotion-linebackward)
+map L <Plug>(easymotion-lineforward)
 
 " Cool prompt
 let g:EasyMotion_prompt = '🔎 '

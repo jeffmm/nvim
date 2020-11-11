@@ -34,7 +34,8 @@
     "yaml",
     "json",
     "python",
-    "java"
+    "java",
+    "go"
   ],
   "coc.preferences.hoverTarget": "float",
 
@@ -50,29 +51,26 @@
     "--ignore=D203,E203,W503",
     "--max-complexity=10"
   ],
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.pydocstyleArgs": ["--convention=google"],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "/usr/local/bin/black",
   "python.formatting.blackArgs": ["--line-length=88", "--target-version=py36"],
-  // "python.condaPath": "~/.miniconda/bin/conda",
-  // "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
-  // "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
+  "python.condaPath": "~/.miniconda/condabin/conda",
+  "python.sortImports.path": "/usr/local/bin/isort",
+  "python.jediPath": "/usr/local/lib/python3.8/site-packages",
+  "python.jediEnabled": true,
 
   // snippets
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
-  //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
-
-  // emmet
-  "emmet.includeLanguages": {
-    "vue-html": "html",
-    "javascript": "javascriptreact"
-  },
+  "snippets.ultisnips.directories": ["~/.config/nvim/snips", "UltiSnips"],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 
   // explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },

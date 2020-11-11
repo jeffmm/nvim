@@ -15,9 +15,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
   " Note taking
-  Plug 'vimwiki/vimwiki'
+  Plug 'vimwiki/vimwiki', {'branch': 'dev'}
+  Plug 'michal-h21/vim-zettel'
   " Text Navigation
-  " Plug 'justinmk/vim-sneak'
   Plug 'easymotion/vim-easymotion'
   " Better Syntax Support
   let g:polyglot_disabled = ['csv']
@@ -26,9 +26,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Cool Icons
   Plug 'ryanoasis/vim-devicons'
   " Auto pairs for '(' '[' '{'
-  Plug 'jiangmiao/auto-pairs'
+  " Plug 'jiangmiao/auto-pairs'
   " Auto pairs for html/xml tags
-  Plug 'alvan/vim-closetag'
+  " Plug 'alvan/vim-closetag'
   " Themes
   Plug 'gruvbox-community/gruvbox'
   Plug 'sainnhe/gruvbox-material'
@@ -41,6 +41,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'alok/notational-fzf-vim'
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
@@ -65,7 +66,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " undo time travel
   Plug 'mbbill/undotree'
   " Find and replace
-  Plug 'ChristianChiarulli/far.vim'
+  Plug 'brooth/far.vim'
   " Smooth scroll
   Plug 'psliwka/vim-smoothie'
   " Swap windows
@@ -78,7 +79,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Easily delete buffers
   Plug 'moll/vim-bbye'
 
-  call plug#end()
+call plug#end()
 
 " Automatically install missing plugins on startup
 autocmd VimEnter *
