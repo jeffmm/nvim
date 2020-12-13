@@ -14,7 +14,7 @@
     \ }
 
 
-let vimwiki_notebook_dir = "~/.vim/wiki/notebook"
+let s:vimwiki_notebook_dir = "~/.vim/wiki/notebook"
 nmap <Plug>NoVimwikiPrevLink <Plug>VimwikiPrevLink 
 nmap <Plug>NoVimwikiNextLink <Plug>VimwikiNextLink 
 " Filetypes enabled for
@@ -22,20 +22,17 @@ let g:vimwiki_filetypes = ['markdown']
 
 let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [{'path': vimwiki_notebook_dir, 
+let g:vimwiki_list = [{'path': s:vimwiki_notebook_dir, 
             \ 'links_space_char': '-',
-            \ 'template_path': vimwiki_notebook_dir . "/templates/",
+            \ 'template_path': s:vimwiki_notebook_dir . "/templates/",
             \ 'template_default': 'default',
-            \ 'path_html': vimwiki_notebook_dir . "site_html",
+            \ 'path_html': s:vimwiki_notebook_dir . "site_html",
             \ 'html_filename_parameterization': 1,
             \ 'custom_wiki2html': 'vimwiki_markdown',
             \ 'template_ext': '.tpl',
             \ 'syntax': 'markdown',
             \ 'ext': '.md',
-            \ 'auto_tags': 1,
-            \ 'auto_toc': 1,
             \ 'markdown_link_ext': 1,
-            \ 'auto_generate_tags': 1,
             \ 'auto_generate_links': 1,
             \ 'exclude_files': ['**/*.md.asc'],
             \ },
@@ -151,16 +148,16 @@ autocmd BufReadPre *.md :call s:vimwiki_sync_pull()
 autocmd BufWritePost *.md :call s:vimwiki_sync_push()
 
 function! s:vimwiki_sync_pull() abort
-    if expand("%:p:h") ==# fnamemodify(vimwiki_notebook_dir, ":p:h")
-        silent! !git -C vimwiki_notebook_dir pull origin master
+    if expand("%:p:h") ==# fnamemodify(s:vimwiki_notebook_dir, ":p:h")
+        silent! execute "!git -C " . s:vimwiki_notebook_dir . " pull origin master &"
     endif
 endfunction
 
 function! s:vimwiki_sync_push() abort
-    if expand("%:p:h") ==# fnamemodify(vimwiki_notebook_dir, ":p:h")
-        silent! !git -C vimwiki_notebook_dir add .
-        silent! !git -C vimwiki_notebook_dir commit -m "vimwiki autocommit" > /dev/null
-        silent! !git -C vimwiki_notebook_dir push origin master > /dev/null
+    if expand("%:p:h") ==# fnamemodify(s:vimwiki_notebook_dir, ":p:h")
+        silent! execute "!git -C " . s:vimwiki_notebook_dir . " add ."
+        silent! execute "!git -C " . s:vimwiki_notebook_dir . " commit -m 'vimwiki autocommit' > /dev/null"
+        silent! execute "!git -C " . s:vimwiki_notebook_dir . " push origin master > /dev/null &"
     endif
 endfunction
 
