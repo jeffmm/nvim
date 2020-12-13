@@ -15,11 +15,12 @@
 
 
 let s:vimwiki_notebook_dir = "~/.vim/wiki/notebook"
+let s:vimwiki_journal_dir = "~/.vim/wiki/journal"
+
 nmap <Plug>NoVimwikiPrevLink <Plug>VimwikiPrevLink 
 nmap <Plug>NoVimwikiNextLink <Plug>VimwikiNextLink 
 " Filetypes enabled for
 let g:vimwiki_filetypes = ['markdown']
-
 let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{'path': s:vimwiki_notebook_dir, 
@@ -36,7 +37,7 @@ let g:vimwiki_list = [{'path': s:vimwiki_notebook_dir,
             \ 'auto_generate_links': 1,
             \ 'exclude_files': ['**/*.md.asc'],
             \ },
-            \ {'path': '~/.vim/wiki/journal',
+            \ {'path': s:vimwiki_journal_dir,
             \ 'links_space_char': '_',
             \ 'syntax': 'markdown',
             \ 'exclude_files': ['**/*.md.asc'],
@@ -124,7 +125,7 @@ function! s:link_file_handler(lines) abort
 endfunction
 
 command! -nargs=* -bang NVInsertLink
-      \ call fzf#vim#files('~/.vim/wiki/notebook', 
+      \ call fzf#vim#files(s:vimwiki_notebook_dir, 
           \ fzf#vim#with_preview({
               \ 'sink*': function('s:link_file_handler'),
               \ 'source': join([
@@ -144,20 +145,22 @@ command! -bang -nargs=? -complete=dir NoteFiles
     \ call fzf#vim#files(vimwiki_notebook_dir, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 
-autocmd BufReadPre *.md :call s:vimwiki_sync_pull()
-autocmd BufWritePost *.md :call s:vimwiki_sync_push()
+autocmd BufReadPre *.md :call s:vimwiki_sync_pull(s:vimwiki_notebook_dir)
+autocmd BufWritePost *.md :call s:vimwiki_sync_push(s:vimwiki_notebook_dir)
+autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
+autocmd BufWritePost *.md.asc :call s:vimwiki_sync_push(s:vimwiki_journal_dir)
 
-function! s:vimwiki_sync_pull() abort
-    if expand("%:p:h") ==# fnamemodify(s:vimwiki_notebook_dir, ":p:h")
-        silent! execute "!git -C " . s:vimwiki_notebook_dir . " pull origin master &"
+function! s:vimwiki_sync_pull(path) abort
+    if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
+        silent! execute "!git -C " . a:path . " pull origin master &"
     endif
 endfunction
 
-function! s:vimwiki_sync_push() abort
-    if expand("%:p:h") ==# fnamemodify(s:vimwiki_notebook_dir, ":p:h")
-        silent! execute "!git -C " . s:vimwiki_notebook_dir . " add ."
-        silent! execute "!git -C " . s:vimwiki_notebook_dir . " commit -m 'vimwiki autocommit' > /dev/null"
-        silent! execute "!git -C " . s:vimwiki_notebook_dir . " push origin master > /dev/null &"
+function! s:vimwiki_sync_push(path) abort
+    if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
+        silent! execute "!git -C " . a:path . " add ."
+        silent! execute "!git -C " . a:path . " commit -m 'vimwiki autocommit' > /dev/null"
+        silent! execute "!git -C " . a:path . " push origin master > /dev/null &"
     endif
 endfunction
 
