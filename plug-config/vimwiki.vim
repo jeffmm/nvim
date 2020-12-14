@@ -124,6 +124,22 @@ function! s:link_file_handler(lines) abort
     call feedkeys('pa', 'n')
 endfunction
 
+command! -nargs=* -bang NVFindNotes
+      \ call fzf#vim#files(s:vimwiki_notebook_dir, 
+          \ fzf#vim#with_preview({
+              \ 'source': join([
+                   \ 'rg',
+                   \ '--files',
+                   \ '--follow',
+                   \ '--smart-case',
+                   \ '--color never',
+                   \ '--no-messages',
+                   \ '*.md',
+                   \ ]),
+              \ 'down': '40%',
+              \ },<bang>0))
+
+
 command! -nargs=* -bang NVInsertLink
       \ call fzf#vim#files(s:vimwiki_notebook_dir, 
           \ fzf#vim#with_preview({
@@ -136,19 +152,20 @@ command! -nargs=* -bang NVInsertLink
                    \ '--line-number',
                    \ '--color never',
                    \ '--no-messages',
+                   \ '*.md',
                    \ ]),
               \ 'down': '40%',
               \ },<bang>0))
 
+" command! -bang -nargs=? -complete=dir NoteFiles
+    " \ call fzf#vim#files(s:vimwiki_notebook_dir, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+
 autocmd BufNewFile,BufRead *.md inoremap <buffer> [] <ESC>:NVInsertLink!<CR>
-command! -bang -nargs=? -complete=dir NoteFiles
-    \ call fzf#vim#files(vimwiki_notebook_dir, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-
-
 autocmd BufReadPre *.md :call s:vimwiki_sync_pull(s:vimwiki_notebook_dir)
 autocmd BufWritePost *.md :call s:vimwiki_sync_push(s:vimwiki_notebook_dir)
-autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
-autocmd BufWritePost *.md.asc :call s:vimwiki_sync_push(s:vimwiki_journal_dir)
+" autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
+" autocmd BufWritePost *.md.asc :call s:vimwiki_sync_push(s:vimwiki_journal_dir)
 
 function! s:vimwiki_sync_pull(path) abort
     if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
@@ -164,7 +181,3 @@ function! s:vimwiki_sync_push(path) abort
     endif
 endfunction
 
-" :cd %:p:h
-" silent! !git pull > /dev/null
-" :e!
-" autocmd! BufWritePost * silent! !git add .;git commit -m "vim autocommit" > /dev/null; git push > /dev/null&
