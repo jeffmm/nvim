@@ -246,26 +246,26 @@ let g:which_key_map.T = {
       \ }
 
 " w is for managing splits
-let g:which_key_map.w =  {
-      \ 'v' : [ '<C-w>v'                             , 'split vertical'],
-      \ 's' : [ '<C-w>s'                             , 'split horizontal'],
-      \ 'n' : [ '<C-w>n'                             , 'horizontal split to new file'],
-      \ 'l' : [ '<C-w>l'                             , 'move right'],
-      \ 'h' : [ '<C-w>h'                             , 'move left'],
-      \ 'k' : [ '<C-w>k'                             , 'move up'],
-      \ 'j' : [ '<C-w>j'                             , 'move down'],
-      \ 'J' : [ '<C-w>J'                             , 'move split to bottom'],
-      \ 'K' : [ '<C-w>K'                             , 'move split to top'],
-      \ 'H' : [ '<C-w>H'                             , 'move split to left'],
-      \ 'L' : [ '<C-w>L'                             , 'move split to right'],
-      \ 'q' : [ '<C-w>q'                             , 'close split'],
-      \ }
-"
-" z is for zettelkasten
-let g:which_key_map.z = {
+" let g:which_key_map.w =  {
+      " \ 'v' : [ '<C-w>v'                             , 'split vertical'],
+      " \ 's' : [ '<C-w>s'                             , 'split horizontal'],
+      " \ 'n' : [ '<C-w>n'                             , 'horizontal split to new file'],
+      " \ 'l' : [ '<C-w>l'                             , 'move right'],
+      " \ 'h' : [ '<C-w>h'                             , 'move left'],
+      " \ 'k' : [ '<C-w>k'                             , 'move up'],
+      " \ 'j' : [ '<C-w>j'                             , 'move down'],
+      " \ 'J' : [ '<C-w>J'                             , 'move split to bottom'],
+      " \ 'K' : [ '<C-w>K'                             , 'move split to top'],
+      " \ 'H' : [ '<C-w>H'                             , 'move split to left'],
+      " \ 'L' : [ '<C-w>L'                             , 'move split to right'],
+      " \ 'q' : [ '<C-w>q'                             , 'close split'],
+      " \ }
+
+" w is for wiki
+let g:which_key_map.w = {
       \ 'name' : '+wiki' ,
-      \ 'z' : [':VimwikiIndex', 'notebook index'],
-      \ 'Z' : [':VimwikiIndex 2', 'journal index'],
+      \ 'w' : [':VimwikiIndex', 'notebook index'],
+      \ 'J' : [':VimwikiIndex 2', 'journal index'],
       \ 'b' : [':NVBacklinks' , 'find backlinks'],
       \ 's' : [':NVSearchText', 'search notes'],
       \ 'n' : [':ZettelCreateNew', 'new note'],

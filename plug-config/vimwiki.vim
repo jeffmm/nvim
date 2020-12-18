@@ -19,6 +19,7 @@ let s:vimwiki_journal_dir = "~/.vim/wiki/journal"
 
 nmap <Plug>NoVimwikiPrevLink <Plug>VimwikiPrevLink 
 nmap <Plug>NoVimwikiNextLink <Plug>VimwikiNextLink 
+vmap <Plug>NoVimwikiNormalizeLinkVisualCR <Plug>VimwikiNormalizeLinkVisualCR
 " Filetypes enabled for
 let g:vimwiki_filetypes = ['markdown']
 let g:vimwiki_markdown_link_ext = 1
@@ -160,18 +161,22 @@ command! -nargs=* -bang NVInsertLink
 " command! -bang -nargs=? -complete=dir NoteFiles
     " \ call fzf#vim#files(s:vimwiki_notebook_dir, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-
-autocmd BufNewFile,BufRead *.md inoremap <buffer> [] <ESC>:NVInsertLink!<CR>
-autocmd BufReadPre *.md :call s:vimwiki_sync_pull(s:vimwiki_notebook_dir)
-autocmd BufWritePost *.md :call s:vimwiki_sync_push(s:vimwiki_notebook_dir)
-" autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
-" autocmd BufWritePost *.md.asc :call s:vimwiki_sync_push(s:vimwiki_journal_dir)
-
 function! s:vimwiki_sync_pull(path) abort
     if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
-        silent! execute "!git -C " . a:path . " pull origin master &"
+        let l:git_pull_update = system("!git -C " . fnamemodify(a:path, ":p:h") . " pull origin master 2> /dev/null | wc -l")
+        :echo l:git_pull_update
+        if l:git_pull_update > 1
+            :edit
+        endif
     endif
 endfunction
+
+autocmd BufNewFile,BufRead *.md inoremap <buffer> [] <ESC>:NVInsertLink!<CR>
+autocmd BufNewFile,BufRead *.md vnoremap <C-m> :call ConvertToImageLink()<cr>
+autocmd BufReadPre *.md call s:vimwiki_sync_pull(s:vimwiki_notebook_dir)"
+" autocmd BufWritePost *.md :call s:vimwiki_sync_push(s:vimwiki_notebook_dir)
+" autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
+" autocmd BufWritePost *.md.asc :call s:vimwiki_sync_push(s:vimwiki_journal_dir)
 
 function! s:vimwiki_sync_push(path) abort
     if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
@@ -195,16 +200,41 @@ function! s:get_visual_selection()
     return join(lines, "\n")
 endfunction
 
+
 "Convert GitHub-Flavored Markdown syntax-highlighting to Liquid syntax-highlighting.
 function! ConvertToImageLink() range
-    let text = <sid>get_visual_selection()
-    let name = "figs\/" . split(text, "/")[-1]
-    echo text
-    echo name
-    silent! execute a:firstline . "," . a:lastline . "s/" . text . "/" . name .  "/g"  
+    let l:text = <sid>get_visual_selection()
+    let l:text = trim(l:text)
+    if empty(glob(expand(l:text)))
+        return
+    endif
+    let l:extension = fnamemodify(l:text, ":e")
+    let l:name = fnamemodify(l:text, ":t:r")
+    if l:extension !=? "png" && l:extension[:2] !=? "tif" && l:extension !=? "bmp" && l:extension !=? "jpg" && l:extension !=? "jpeg"
+        return
+    endif
+    let l:directory = expand("%:p:h") . "/figs/"
+    if empty(glob(l:directory))
+        silent! execute "!mkdir " . l:directory
+    endif
+    let l:name = substitute(l:name, " ", "_", "g")
+    let l:output = l:directory . l:name . ".jpg"
+    if l:extension !=? "png" && l:extension[:2] !=? "tif" && l:extension !=? "bmp"
+        silent! execute "!convert " . l:text . " " . l:output
+    else
+        silent! execute "!cp " . l:text . " " . l:output
+    endif
+    " Reduce file size if ImageMagick is installed
+    if executable("mogrify")
+        let width = system("identify -format '%w' " . l:output)
+        silent! execute '!mogrify -filter Triangle -define filter:support=2 
+                    \ -thumbnail ' . float2nr(round(width/2))
+                    \ . ' -unsharp 0.25x0.25+8.3+0.065
+                    \ -dither None -posterize 136 -quality 82 -define
+                    \ jpeg:fancy-upsampling=off -interlace none 
+                    \ -colorspace sRGB ' . l:output
+    endif
+    execute ":'<,'>s#" . fnameescape(l:text) . "#![" . l:name . "](figs/" . l:name . ".jpg)#"
 endfunction
-"
 "Convert within visual selection
-vnoremap <leader>H :call ConvertToImageLink()<cr>
-
-"blah/bloo/blee.md blah
+" vnoremap <C-m> :call ConvertToImageLink()<cr>
