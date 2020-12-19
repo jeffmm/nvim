@@ -24,9 +24,10 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffse
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/**' -g '!*.{ipynb,jpg,png,pdf}'"
-"-g '!{node_modules,.git}'
 
+                               \
 " Customize fzf colors to match your color scheme
+let $BAT_THEME = "gruvbox-light"
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -42,20 +43,72 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-"Get Files
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
 
+" if has('win64') || has('win32')
+  " let s:null_path = 'NUL'
+  " let s:command = ''
+" else
+  " let s:null_path = '/dev/null'
+  " let s:command = 'command'
+" endif
 
-" Get text in files with Rg
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
+" let s:python_executable = executable('pypy3') ? 'pypy3' : get(g:, 'python3_host_prog', 'python3')
+" let s:highlight_path_expr = join([s:python_executable , 
+            " \ '-S',expand('<sfile>:p:h:h') . '/print_lines.py' , 
+            " \ '{2} {1} $FZF_PREVIEW_LINES', '2>' . s:null_path,])
 
+" Get Files
+" command! -bang -nargs=? -complete=dir Files call RgFiles(<bang>0, <q-args>, "")
+" function! RgFiles(bang, dir, args)
+    " call fzf#vim#files(a:dir, {
+              " \ 'source': join([
+                   " \ 'rg',
+                   " \ '--files',
+                   " \ '--follow',
+                   " \ '--smart-case',
+                   " \ '--line-number',
+                   " \ '--color never',
+                   " \ '--no-messages',
+                   " \ a:args,
+                   " \ ]),
+              " \ 'down': '40%',
+              " \ 'options': [
+                  " \ '--layout=reverse', '--inline-info',
+                    " \ '--preview=' . 'cat {}']
+              " \ },a:bang)
+" endfunction
+
+" Search file text, and highlight line
+" command! -nargs=* -bang RgText :call Rg(<bang>0, '[a-zA-Z0-9]', <q-args>)
+" function! Rg(bang, search, dir)
+     " call fzf#run(
+          " \ fzf#wrap({
+              " \ 'source': join([
+                   " \ 'rg',
+                   " \ '--follow',
+                   " \ '--smart-case',
+                   " \ '--line-number',
+                   " \ '--color never',
+                   " \ '--no-messages',
+                   " \ a:search,
+                   " \ a:dir
+                   " \ ]),
+              " \ 'down': '40%',
+              " \ 'options': join([
+                               " \ '--print-query',
+                               " \ '--ansi',
+                               " \ '--multi',
+                               " \ '--exact',
+                               " \ '--inline-info',
+                               " \ '--delimiter=":"',
+                               " \ '--tiebreak=' . 'length,begin' ,
+                               " \ '--preview=' . shellescape(s:highlight_path_expr) ,
+                               " \ ])},a:bang))
+" endfunction
  " Make Ripgrep ONLY search file contents and not filenames
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
   \   <bang>0)

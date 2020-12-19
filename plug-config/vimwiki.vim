@@ -7,35 +7,35 @@
     \   'text_objs': 0,
     \   'table_format': 0,
     \   'table_mappings': 0,
-    \   'lists': 0,
+    \   'lists': 1,
     \   'links': 1,
     \   'html': 0,
     \   'mouse': 0,
     \ }
 
 
-let s:vimwiki_notebook_dir = "~/.vim/wiki/notebook"
-let s:vimwiki_journal_dir = "~/.vim/wiki/journal"
+let s:vimwiki_dir = "~/.vim/wiki/"
+let s:vimwiki_notebook_dir = s:vimwiki_dir . "/notebook"
+let s:vimwiki_journal_dir = s:vimwiki_dir . "/journal"
 
 nmap <Plug>NoVimwikiPrevLink <Plug>VimwikiPrevLink 
 nmap <Plug>NoVimwikiNextLink <Plug>VimwikiNextLink 
-vmap <Plug>NoVimwikiNormalizeLinkVisualCR <Plug>VimwikiNormalizeLinkVisualCR
+
 " Filetypes enabled for
 let g:vimwiki_filetypes = ['markdown']
 let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{'path': s:vimwiki_notebook_dir, 
             \ 'links_space_char': '-',
-            \ 'template_path': s:vimwiki_notebook_dir . "/templates/",
+            \ 'template_path': s:vimwiki_dir . "/templates",
             \ 'template_default': 'default',
-            \ 'path_html': s:vimwiki_notebook_dir . "site_html",
+            \ 'path_html': s:vimwiki_dir . "/site_html",
             \ 'html_filename_parameterization': 1,
             \ 'custom_wiki2html': 'vimwiki_markdown',
             \ 'template_ext': '.tpl',
             \ 'syntax': 'markdown',
             \ 'ext': '.md',
             \ 'markdown_link_ext': 1,
-            \ 'auto_generate_links': 1,
             \ 'exclude_files': ['**/*.md.asc'],
             \ },
             \ {'path': s:vimwiki_journal_dir,
@@ -60,17 +60,6 @@ let g:zettel_link_format="[%title](%link.md)"
 
 " For quickly searching old notes / creating a new note
 let g:nv_search_paths = ['~/.vim/wiki/notebook']
-
-
-" function! zettel#vimwiki#escape_filename(name)
-  " let name = substitute(a:name, "[%.%,%?%!%:]", "", "g") " remove unwanted characters
-  " let schar = vimwiki#vars#get_wikilocal('links_space_char') " ' ' by default
-  " let name = substitute(name, " ", schar, "g") " change spaces to link_space_char
-
-  " let name = tolower(name)
-  " return fnameescape(name)
-" endfunction
-
 
 function! VimwikiLinkHandler(link)
     if vimwiki#vars#get_wikilocal('ext') ==# '.md.asc'
@@ -99,15 +88,24 @@ function! VimwikiNewNote()
     execute "VimwikiIndex 1"
     let title = input("New note name: ", "" . strftime("%Y%m%d%H%M"))
     execute "ZettelNew " . title
-    "expand("=strftime(\"%Y%m%d%H%M\")")
 endfunction
 
 command! ZettelCreateNew call VimwikiNewNote()
-"
-" Search for note that link to current note
-command! NVBacklinks :execute "NV (" . expand("%:t") . ")"
-" Search note tags, which is any word surrounded by colons (vimwiki style tags)
-command! NVTags :execute "NV :[a-zA-Z0-9]+:"
+
+if has('win64') || has('win32')
+  let s:null_path = 'NUL'
+  let s:command = ''
+else
+  let s:null_path = '/dev/null'
+  let s:command = 'command'
+endif
+
+let s:python_executable = executable('pypy3') ? 'pypy3' : get(g:, 'python3_host_prog', 'python3')
+let s:highlight_path_expr = join([s:python_executable , 
+            \ '-S',expand('<sfile>:p:h:h') . '/print_lines.py' , 
+            \ '{2} {1} $FZF_PREVIEW_LINES', '2>' . s:null_path,])
+
+
 " Avoid lines with no words in the search results
 command! NVSearchText :execute "NV [a-zA-Z0-9]+"
 
@@ -125,25 +123,38 @@ function! s:link_file_handler(lines) abort
     call feedkeys('pa', 'n')
 endfunction
 
-command! -nargs=* -bang NVFindNotes
-      \ call fzf#vim#files(s:vimwiki_notebook_dir, 
-          \ fzf#vim#with_preview({
-              \ 'source': join([
-                   \ 'rg',
-                   \ '--files',
-                   \ '--follow',
-                   \ '--smart-case',
-                   \ '--color never',
-                   \ '--no-messages',
-                   \ '*.md',
-                   \ ]),
-              \ 'down': '40%',
-              \ },<bang>0))
+
+function! RgText(fullscreen, search, dir, )
+  call fzf#vim#grep(
+  \   'rg --column --line-number --smart-case --no-heading --color=always ' . shellescape(a:search) . ' ' . fnameescape(a:dir), 1,
+  \   a:fullscreen ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'down': '40%', 'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
+  \   a:fullscreen)
+endfunction
 
 
-command! -nargs=* -bang NVInsertLink
+" command! -bang -nargs=* RgWikiText :call RgText(<bang>0, '[a-zA-Z0-9]', s:vimwiki_notebook_dir)
+" command! -bang -nargs=* RgWikiTags :call RgText(<bang>0, ':[a-zA-Z0-9]+:', s:vimwiki_notebook_dir)
+
+" command! NVBacklinks :execute "NV (" . expand("%:t") . ")"
+" command! NVTags :execute "NV :[a-zA-Z0-9]+:"
+" Search for note that link to current note
+command! -nargs=* -bang RgWikiBacklinks :call RgText(<bang>0, 
+            \ '(' . expand("%:t") . ')', s:vimwiki_notebook_dir)
+" Search note tags, which is any word surrounded by colons (vimwiki style tags)
+command! -nargs=* -bang RgWikiTags :call RgText(<bang>0,
+            \ ':[a-zA-Z0-9]+:', s:vimwiki_notebook_dir)
+" Search for text in wiki files
+command! -nargs=* -bang RgWikiText :call RgText(<bang>0,
+            \ '[a-zA-Z0-9]+', s:vimwiki_notebook_dir)
+" Search for filenames in wiki
+command! -nargs=* -bang RgWikiFiles :call RgFiles(<bang>0, 
+            \ s:vimwiki_notebook_dir, "*.md")
+
+
+command! -nargs=* -bang InsertWikiLink
       \ call fzf#vim#files(s:vimwiki_notebook_dir, 
-          \ fzf#vim#with_preview({
+      \ {
               \ 'sink*': function('s:link_file_handler'),
               \ 'source': join([
                    \ 'rg',
@@ -156,23 +167,22 @@ command! -nargs=* -bang NVInsertLink
                    \ '*.md',
                    \ ]),
               \ 'down': '40%',
-              \ },<bang>0))
-
-" command! -bang -nargs=? -complete=dir NoteFiles
-    " \ call fzf#vim#files(s:vimwiki_notebook_dir, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+              \ 'options': [
+                  \ '--layout=reverse', '--inline-info',
+                    \ '--preview=' . 'cat {}']
+              \ },<bang>0)
 
 function! s:vimwiki_sync_pull(path) abort
     if expand("%:p:h") ==# fnamemodify(a:path, ":p:h")
-        let l:git_pull_update = system("!git -C " . fnamemodify(a:path, ":p:h") . " pull origin master 2> /dev/null | wc -l")
-        :echo l:git_pull_update
-        if l:git_pull_update > 1
+        let s:git_pull_update = system("!git -C " . fnamemodify(a:path, ":p:h") . " pull origin master 2> /dev/null | wc -l")
+        :echo s:git_pull_update
+        if s:git_pull_update > 1
             :edit
         endif
     endif
 endfunction
 
-autocmd BufNewFile,BufRead *.md inoremap <buffer> [] <ESC>:NVInsertLink!<CR>
-autocmd BufNewFile,BufRead *.md vnoremap <C-m> :call ConvertToImageLink()<cr>
+autocmd BufNewFile,BufRead *.md inoremap <buffer> [] <ESC>:InsertWikiLink<CR>
 autocmd BufReadPre *.md call s:vimwiki_sync_pull(s:vimwiki_notebook_dir)"
 " autocmd BufWritePost *.md :call s:vimwiki_sync_push(s:vimwiki_notebook_dir)
 " autocmd BufReadPre *.md.asc :call s:vimwiki_sync_pull(s:vimwiki_journal_dir)
@@ -185,56 +195,3 @@ function! s:vimwiki_sync_push(path) abort
         silent! execute "!git -C " . a:path . " push origin master > /dev/null &"
     endif
 endfunction
-
-function! s:get_visual_selection()
-    " See https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-endfunction
-
-
-"Convert GitHub-Flavored Markdown syntax-highlighting to Liquid syntax-highlighting.
-function! ConvertToImageLink() range
-    let l:text = <sid>get_visual_selection()
-    let l:text = trim(l:text)
-    if empty(glob(expand(l:text)))
-        return
-    endif
-    let l:extension = fnamemodify(l:text, ":e")
-    let l:name = fnamemodify(l:text, ":t:r")
-    if l:extension !=? "png" && l:extension[:2] !=? "tif" && l:extension !=? "bmp" && l:extension !=? "jpg" && l:extension !=? "jpeg"
-        return
-    endif
-    let l:directory = expand("%:p:h") . "/figs/"
-    if empty(glob(l:directory))
-        silent! execute "!mkdir " . l:directory
-    endif
-    let l:name = substitute(l:name, " ", "_", "g")
-    let l:output = l:directory . l:name . ".jpg"
-    if l:extension !=? "png" && l:extension[:2] !=? "tif" && l:extension !=? "bmp"
-        silent! execute "!convert " . l:text . " " . l:output
-    else
-        silent! execute "!cp " . l:text . " " . l:output
-    endif
-    " Reduce file size if ImageMagick is installed
-    if executable("mogrify")
-        let width = system("identify -format '%w' " . l:output)
-        silent! execute '!mogrify -filter Triangle -define filter:support=2 
-                    \ -thumbnail ' . float2nr(round(width/2))
-                    \ . ' -unsharp 0.25x0.25+8.3+0.065
-                    \ -dither None -posterize 136 -quality 82 -define
-                    \ jpeg:fancy-upsampling=off -interlace none 
-                    \ -colorspace sRGB ' . l:output
-    endif
-    execute ":'<,'>s#" . fnameescape(l:text) . "#![" . l:name . "](figs/" . l:name . ".jpg)#"
-endfunction
-"Convert within visual selection
-" vnoremap <C-m> :call ConvertToImageLink()<cr>

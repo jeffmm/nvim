@@ -20,9 +20,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Text Navigation
   Plug 'easymotion/vim-easymotion'
   " Better Syntax Support
-  let g:polyglot_disabled = ['csv']
+  " let g:polyglot_disabled = ['csv']
 
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   " Cool Icons
   Plug 'ryanoasis/vim-devicons'
   " Auto pairs for '(' '[' '{'
@@ -41,7 +41,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'alok/notational-fzf-vim'
+  " Plug 'alok/notational-fzf-vim'
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
