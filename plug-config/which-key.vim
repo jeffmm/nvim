@@ -120,7 +120,7 @@ let g:which_key_map.s = {
       \ 'P' : [':Tags'                  , 'project tags'],
       \ 's' : [':CocList snippets'      , 'snippets'],
       \ 'S' : [':Colors'                , 'color schemes'],
-      \ 't' : [':RgText'                    , 'text Rg'],
+      \ 't' : [':Rg'                    , 'text Rg'],
       \ 'T' : [':BTags'                 , 'buffer tags'],
       \ 'w' : [':Windows'               , 'search windows'],
       \ 'y' : [':Filetypes'             , 'file types'],
@@ -264,46 +264,45 @@ let g:which_key_map.T = {
 " w is for wiki
 let g:which_key_map.w = {
       \ 'name' : '+wiki' ,
-      \ 'w' : [':VimwikiIndex', 'notebook index'],
-      \ 'J' : [':VimwikiIndex 2', 'journal index'],
-      \ 'b' : [':RgWikiBacklinks' , 'list backlinks'],
-      \ 's' : [':RgWikiText', 'search note text'],
-      \ 'f' : [':RgWikiFiles', 'search files'],
-      \ 'n' : [':ZettelCreateNew', 'new wiki note'],
+      \ 'w' : [':VimRoamIndex', 'notebook index'],
+      \ 'J' : [':VimRoamIndex 2', 'journal index'],
+      \ 'n' : [':VimRoamNewNote', 'new wiki note'],
+      \ 'i' : [':VimRoamCheckLinks', 'wiki inbox'],
+      \ 's' : [':VimRoamRgText', 'search wiki text'],
+      \ 't' : [':VimRoamRgTags', 'search tags'],
+      \ 'f' : [':VimRoamRgFiles', 'search files'],
+      \ 'b' : [':VimRoamRgBacklinks' , 'list backlinks'],
       \ 'p' : [':MarkdownPreview', 'markdown preview'],
-      \ 't' : [':RgWikiTags', 'search tags'],
-      \ 'i' : [':VimwikiCheckLinks', 'unlinked note inbox'],
-      \ 'y' : [':ZettelYankName', 'yank note link'],
-      \ 'I' : [':ZettelInsertNote', 'insert note'],
-      \ 'R' : [':VimwikiRenameFile', 'rename note'],
-      \ 'D' : [':VimwikiDeleteFile', 'delete note'],
+      \ 'y' : [':VimRoamYankName', 'yank wiki link'],
+      \ 'R' : [':VimRoamRenameFile', 'rename note'],
+      \ 'D' : [':VimRoamDeleteFile', 'delete note'],
       \ }
 
 " Global
-" <Plug>VimwikiIndex
-" <Plug>VimwikiTabIndex
-" <Plug>VimwikiUISelect
-" <Plug>VimwikiDiaryIndex
-" <Plug>VimwikiMakeDiaryNote
-" <Plug>VimwikiTabMakeDiaryNote
-" <Plug>VimwikiMakeYesterdayDiaryNote
-" <Plug>VimwikiMakeTomorrowDiaryNote
+" <Plug>VimRoamIndex
+" <Plug>VimRoamTabIndex
+" <Plug>VimRoamUISelect
+" <Plug>VimRoamDiaryIndex
+" <Plug>VimRoamMakeDiaryNote
+" <Plug>VimRoamTabMakeDiaryNote
+" <Plug>VimRoamMakeYesterdayDiaryNote
+" <Plug>VimRoamMakeTomorrowDiaryNote
 "
 " " Local
-" <Plug>Vimwiki2HTML
-" <Plug>Vimwiki2HTMLBrowse
-" <Plug>VimwikiDiaryGenerateLinks
-" <Plug>VimwikiFollowLink
-" <Plug>VimwikiSplitLink
-" <Plug>VimwikiVSplitLink
-" <Plug>VimwikiTabnewLink
-" <Plug>VimwikiGoBackLink
-" <Plug>VimwikiNextLink
-" <Plug>VimwikiPrevLink
-" <Plug>VimwikiGoto
-" <Plug>VimwikiDeleteLink
-" <Plug>VimwikiRenameLink
-" <Plug>VimwikiAddHeaderLevel
+" <Plug>VimRoam2HTML
+" <Plug>VimRoam2HTMLBrowse
+" <Plug>VimRoamDiaryGenerateLinks
+" <Plug>VimRoamFollowLink
+" <Plug>VimRoamSplitLink
+" <Plug>VimRoamVSplitLink
+" <Plug>VimRoamTabnewLink
+" <Plug>VimRoamGoBackLink
+" <Plug>VimRoamNextLink
+" <Plug>VimRoamPrevLink
+" <Plug>VimRoamGoto
+" <Plug>VimRoamDeleteLink
+" <Plug>VimRoamRenameLink
+" <Plug>VimRoamAddHeaderLevel
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")

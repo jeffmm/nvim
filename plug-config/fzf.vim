@@ -58,26 +58,6 @@ let g:fzf_colors =
             " \ '{2} {1} $FZF_PREVIEW_LINES', '2>' . s:null_path,])
 
 " Get Files
-" command! -bang -nargs=? -complete=dir Files call RgFiles(<bang>0, <q-args>, "")
-" function! RgFiles(bang, dir, args)
-    " call fzf#vim#files(a:dir, {
-              " \ 'source': join([
-                   " \ 'rg',
-                   " \ '--files',
-                   " \ '--follow',
-                   " \ '--smart-case',
-                   " \ '--line-number',
-                   " \ '--color never',
-                   " \ '--no-messages',
-                   " \ a:args,
-                   " \ ]),
-              " \ 'down': '40%',
-              " \ 'options': [
-                  " \ '--layout=reverse', '--inline-info',
-                    " \ '--preview=' . 'cat {}']
-              " \ },a:bang)
-" endfunction
-
 " Search file text, and highlight line
 " command! -nargs=* -bang RgText :call Rg(<bang>0, '[a-zA-Z0-9]', <q-args>)
 " function! Rg(bang, search, dir)
@@ -105,6 +85,32 @@ let g:fzf_colors =
                                " \ '--preview=' . shellescape(s:highlight_path_expr) ,
                                " \ ])},a:bang))
 " endfunction
+
+"Get Files
+" command! -bang -nargs=? -complete=dir Files call RgFiles(<bang>0, <q-args>, "")
+" function! RgFiles(bang, dir, args)
+    " call fzf#vim#files(a:dir, {
+              " \ 'source': join([
+                   " \ 'rg',
+                   " \ '--files',
+                   " \ '--follow',
+                   " \ '--smart-case',
+                   " \ '--line-number',
+                   " \ '--color never',
+                   " \ '--no-messages',
+                   " \ a:args,
+                   " \ ]),
+              " \ 'down': '40%',
+              " \ 'options': [
+                  " \ '--layout=reverse', '--inline-info',
+                    " \ '--preview=' . 'cat {}']
+              " \ },a:bang)
+" endfunction
+
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)"
+
  " Make Ripgrep ONLY search file contents and not filenames
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(

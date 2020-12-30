@@ -15,8 +15,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
   " Note taking
-  Plug 'vimwiki/vimwiki', {'branch': 'dev'}
-  Plug 'michal-h21/vim-zettel'
+  Plug 'jeffmm/vimroam'
+  " Plug 'vimwiki/vimwiki', {'branch': 'dev'}
+  " Plug 'michal-h21/vim-zettel'
   " Text Navigation
   Plug 'easymotion/vim-easymotion'
   " Better Syntax Support
