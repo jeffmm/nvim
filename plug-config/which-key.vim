@@ -262,21 +262,21 @@ let g:which_key_map.T = {
       " \ }
 
 " w is for wiki
-let g:which_key_map.w = {
-      \ 'name' : '+wiki' ,
-      \ 'w' : [':VimRoamIndex', 'notebook index'],
-      \ 'J' : [':VimRoamIndex 2', 'journal index'],
-      \ 'n' : [':VimRoamNewNote', 'new wiki note'],
-      \ 'i' : [':VimRoamCheckLinks', 'wiki inbox'],
-      \ 's' : [':VimRoamRgText', 'search wiki text'],
-      \ 't' : [':VimRoamRgTags', 'search tags'],
-      \ 'f' : [':VimRoamRgFiles', 'search files'],
-      \ 'b' : [':VimRoamRgBacklinks' , 'list backlinks'],
-      \ 'p' : [':MarkdownPreview', 'markdown preview'],
-      \ 'y' : [':VimRoamYankName', 'yank wiki link'],
-      \ 'R' : [':VimRoamRenameFile', 'rename note'],
-      \ 'D' : [':VimRoamDeleteFile', 'delete note'],
-      \ }
+" let g:which_key_map.w = {
+      " \ 'name' : '+wiki' ,
+      " \ 'w' : [':VimRoamIndex', 'notebook index'],
+      " \ 'J' : [':VimRoamIndex 2', 'journal index'],
+      " \ 'n' : [':VimRoamNewNote', 'new wiki note'],
+      " \ 'i' : [':VimRoamCheckLinks', 'wiki inbox'],
+      " \ 's' : [':VimRoamRgText', 'search wiki text'],
+      " \ 't' : [':VimRoamRgTags', 'search tags'],
+      " \ 'f' : [':VimRoamRgFiles', 'search files'],
+      " \ 'b' : [':VimRoamRgBacklinks' , 'list backlinks'],
+      " \ 'p' : [':MarkdownPreview', 'markdown preview'],
+      " \ 'y' : [':VimRoamYankName', 'yank wiki link'],
+      " \ 'R' : [':VimRoamRenameFile', 'rename note'],
+      " \ 'D' : [':VimRoamDeleteFile', 'delete note'],
+      " \ }
 
 " Global
 " <Plug>VimRoamIndex
