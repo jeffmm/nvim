@@ -18,6 +18,7 @@ let g:coc_global_extensions = [
     \ 'coc-yaml',
     \ 'coc-java',
     \ 'coc-go',
+    \ 'coc-sourcekit',
     \ 'coc-stylelint',
     \ 'coc-styled-components',
     \ 'coc-vimlsp',

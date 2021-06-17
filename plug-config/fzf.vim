@@ -11,13 +11,6 @@ let g:fzf_action = {
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 
-" map <C-f> :Files<CR>
-" map <leader>b :Buffers<CR>
-" nnoremap <leader>g :Rg<CR>
-" nnoremap <leader>t :Tags<CR>
-" nnoremap <leader>m :Marks<CR>
-
-
 let g:fzf_tags_command = 'ctags -R'
 " Border color
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
@@ -42,71 +35,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-
-" if has('win64') || has('win32')
-  " let s:null_path = 'NUL'
-  " let s:command = ''
-" else
-  " let s:null_path = '/dev/null'
-  " let s:command = 'command'
-" endif
-
-" let s:python_executable = executable('pypy3') ? 'pypy3' : get(g:, 'python3_host_prog', 'python3')
-" let s:highlight_path_expr = join([s:python_executable , 
-            " \ '-S',expand('<sfile>:p:h:h') . '/print_lines.py' , 
-            " \ '{2} {1} $FZF_PREVIEW_LINES', '2>' . s:null_path,])
-
-" Get Files
-" Search file text, and highlight line
-" command! -nargs=* -bang RgText :call Rg(<bang>0, '[a-zA-Z0-9]', <q-args>)
-" function! Rg(bang, search, dir)
-     " call fzf#run(
-          " \ fzf#wrap({
-              " \ 'source': join([
-                   " \ 'rg',
-                   " \ '--follow',
-                   " \ '--smart-case',
-                   " \ '--line-number',
-                   " \ '--color never',
-                   " \ '--no-messages',
-                   " \ a:search,
-                   " \ a:dir
-                   " \ ]),
-              " \ 'down': '40%',
-              " \ 'options': join([
-                               " \ '--print-query',
-                               " \ '--ansi',
-                               " \ '--multi',
-                               " \ '--exact',
-                               " \ '--inline-info',
-                               " \ '--delimiter=":"',
-                               " \ '--tiebreak=' . 'length,begin' ,
-                               " \ '--preview=' . shellescape(s:highlight_path_expr) ,
-                               " \ ])},a:bang))
-" endfunction
-
-"Get Files
-" command! -bang -nargs=? -complete=dir Files call RgFiles(<bang>0, <q-args>, "")
-" function! RgFiles(bang, dir, args)
-    " call fzf#vim#files(a:dir, {
-              " \ 'source': join([
-                   " \ 'rg',
-                   " \ '--files',
-                   " \ '--follow',
-                   " \ '--smart-case',
-                   " \ '--line-number',
-                   " \ '--color never',
-                   " \ '--no-messages',
-                   " \ a:args,
-                   " \ ]),
-              " \ 'down': '40%',
-              " \ 'options': [
-                  " \ '--layout=reverse', '--inline-info',
-                    " \ '--preview=' . 'cat {}']
-              " \ },a:bang)
-" endfunction
-
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)"

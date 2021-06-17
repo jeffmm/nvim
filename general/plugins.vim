@@ -70,7 +70,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Find and replace
   Plug 'brooth/far.vim'
   " Smooth scroll
-  Plug 'psliwka/vim-smoothie'
+  " Plug 'psliwka/vim-smoothie'
   " Swap windows
   Plug 'wesQ3/vim-windowswap'
   " Markdown Preview

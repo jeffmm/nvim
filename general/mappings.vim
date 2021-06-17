@@ -4,6 +4,14 @@ nnoremap <C-l> $
 nnoremap <C-h> ^
 xnoremap <C-l> $
 xnoremap <C-h> ^
+" nnoremap L $
+" nnoremap H ^
+" xnoremap L $
+" xnoremap H ^
+" nnoremap J 5gj
+" nnoremap K 5gk
+" xnoremap J 5gj
+" xnoremap K 5gk
 
 " Leader key
 let mapleader=" "
@@ -21,9 +29,6 @@ nnoremap <silent> <TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
 
 " Move selected line / block of text in visual mode
-" shift + k to move up
-" shift + j to move down
-
 " Alternate way to save
 nnoremap <silent> <C-s> :w<CR>
 " Alternate way to quit

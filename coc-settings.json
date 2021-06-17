@@ -58,7 +58,7 @@
   "python.formatting.blackArgs": ["--line-length=88", "--target-version=py36"],
   "python.condaPath": "~/.miniconda/condabin/conda",
   "python.sortImports.path": "/usr/local/bin/isort",
-  "python.jediPath": "/usr/local/lib/python3.8/site-packages",
+  "python.jediPath": "/usr/local/lib/python3.9/site-packages",
   "python.jediEnabled": true,
 
   // snippets
