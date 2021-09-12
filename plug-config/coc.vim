@@ -14,7 +14,7 @@ let g:coc_global_extensions = [
     \ 'coc-cssmodules',
     \ 'coc-html',
     \ 'coc-json',
-    \ 'coc-python',
+    \ 'coc-pyright',
     \ 'coc-yaml',
     \ 'coc-java',
     \ 'coc-go',
