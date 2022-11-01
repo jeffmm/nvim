@@ -1,4 +1,7 @@
 tags*
-autoload/plugged/*
-vimwiki/
+autoload
+wiki
+journal
 .netrwhist
+undodir
+viminfo
