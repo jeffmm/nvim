@@ -10,8 +10,9 @@ installnodemac() { \
 }
 
 installnodeubuntu() { \
-  sudo apt install nodejs
-  sudo apt install npm
+  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  sudo apt install -y nodejs
+  sudo apt install -y npm
 }
 
 installnodearch() { \
