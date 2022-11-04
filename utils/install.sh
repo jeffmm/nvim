@@ -1,10 +1,10 @@
 #!/bin/bash
 
 set -o nounset    # error when referencing undefined variable
-set -o errexit    # exit when command fails
+# set -o errexit    # exit when command fails
 
 installreqmac() { \
-  brew install ripgrep fzf ranger
+  brew install ripgrep fzf ranger || echo "dependencies installed"
 }
 
 installreqdeb() { \
@@ -18,7 +18,7 @@ installreqs() { \
 }
 
 installnodemac() { \
-  brew install lua node yarn
+  brew install lua node yarn || echo "node dependencies installed"
 }
 
 installnodedeb() { \
@@ -36,15 +36,24 @@ installcocextensions() { \
   cd ~/.config/coc/extensions
   [ ! -f package.json ] && echo '{"dependencies":{}}'> package.json
   # Change extension names to the extensions you need
-  $SUDO npm install coc-explorer coc-snippets coc-json coc-actions bash-language-server \
+  if [ "$(uname)" == "Darwin" ]; then
+    npm install coc-explorer coc-snippets coc-json coc-actions bash-language-server \
            --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+  else
+    $SUDO npm install coc-explorer coc-snippets coc-json coc-actions bash-language-server \
+           --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+  fi
 }
 
 installnode() { \
   echo "Installing node..."
   [ "$(uname)" == "Darwin" ] && installnodemac
   [ $(command -v apt-get) ] && installnodedeb
-  $SUDO npm i -g neovim
+  if [ "$(uname)" == "Darwin" ]; then
+    npm i -g neovim
+  else
+    $SUDO npm i -g neovim
+  fi
 }
 
 installpipmac() { \
@@ -115,7 +124,7 @@ installnvimdeb() { \
 }
 
 installnvimmac() { \
-  brew install neovim
+  brew install neovim || echo "neovim installed"
 }
 
 installnvim() { \
@@ -131,7 +140,7 @@ installfontdeb() { \
 }
 
 installfontmac() { \
-  brew install --cask font-hack-nerd-font
+  brew install --cask font-hack-nerd-font || echo "font installed"
 }
 
 installfont() { \
@@ -145,7 +154,7 @@ echo "Installing Vim environment"
 
 [ ! "$(uname)" == "Darwin" ] && [ ! $(command -v apt-get) ] && echo "OS not supported" && exit
 
-if $(command -v sudo); then
+if [ $(command -v sudo) ]; then
     SUDO=sudo
 else
     SUDO=""
