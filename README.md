@@ -1,99 +1,27 @@
-# Vim configuration
+# Neovim configuration
 
-Vim environment and configuration using neovim, based on the config by [ChristianChiarulli](https://github.com/ChristianChiarulli/nvim).
+Neovim configuration and environment installation scripts.
 
 ## Easy install
 
-The following one-liner will install the config---if you have an existing config it will move it to `~/.config/nvim.old`
+The installation script only supports Mac and Debian flavors of Linux.
 
-This script only supports Mac and Ubuntu
+The following one-liner will install everything needed by the Neovim configuration (if you have an existing config it will be moved to `~/.config/nvim.old`)
 
 ```
 bash <(curl -s https://raw.githubusercontent.com/jeffmm/nvim/master/utils/install.sh)
 ```
-## Dependencies and useful programs to install
 
-Use `:checkhealth` in a running instance of nvim to ensure everything is installed correctly
+The above script has been tested for both amd64 and arm64 architectures (warning: on arm64 architectures, neovim will be built from source, and will install the necessary dependencies for the build; this can be avoided by pre-installing neovim).
 
-- python3
+## Dependencies
+
+The installation script will install the following dependencies if they are missing:
+
 - neovim
-- node
-- ranger (`pip install ranger-fm`)
+- python3-pip
+- node (v18)
 - fzf
-- ueberzug (if not on mac)
 - ripgrep
-- the_silver_searcher
-- fd
-- universal-ctags
-- lazygit
-- lazydocker
-
-### Install Neovim
-
-- Mac
-
-  ```
-  brew install neovim
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt install neovim
-  ```
-
-### Clone this repo to your config folder
-
-```
-git clone https://github.com/jeffmm/nvim.git ~/.config/nvim
-```
-
-### Install python & node support
-
-```
-pip install pynvim
-npm i -g neovim
-```
-
-### Install neovim-remote
-
-This will install `nvr` to `~/.local/bin` so you will need to add the following to your `bashrc` or `zshrc`
-
-```
-pip install neovim-remote
-export PATH=$HOME/.local/bin:$PATH
-```
-
-### Install clipboard support
-
-- Mac
-
-  pbcopy should be builtin
-
-- Ubuntu
-
-  ```
-  sudo apt install xsel
-  ```
-
-### Install python & node support from your existing environment (optional)
-
-Make sure to add these paths somewhere in your config
-
-```
-let g:python3_host_prog = expand("<path to python with pynvim installed>")
-let g:node_host_prog = expand("<path to node with neovim installed>")
-```
-
-### FAR config
-```
-:UpdateRemotePlugins
-```
-
-### Gists config
-
-To use **vim-gists** you will need to configure the following:
-
-```
-git config --global github.user <username>
-```
+- ranger
+- xsel (for clipboard support, Linux only)

@@ -3,57 +3,31 @@
 set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
 
+installreqmac() { \
+  brew install ripgrep fzf ranger
+}
+
+installreqdeb() { \
+  $SUDO apt-get update -y && $SUDO apt-get install -y curl git ripgrep fzf ranger
+  [ ! -f /etc/timezone ] && $SUDO echo America/Denver >> /etc/timezone
+}
+
+installreqs() { \
+  [ "$(uname)" == "Darwin" ] && installreqmac
+  [ $(command -v apt-get) ] && installreqdeb
+}
+
 installnodemac() { \
-  brew install lua
-  brew install node
-  brew install yarn
+  brew install lua node yarn
 }
 
-installnodeubuntu() { \
-  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-  sudo apt install -y nodejs
-  sudo apt install -y npm
-}
-
-installnodearch() { \
-  sudo pacman -S nodejs
-  sudo pacman -S npm
-}
-
-installnode() { \
-  echo "Installing node..."
-  [ "$(uname)" == "Darwin" ] && installnodemac
-  [  -n "$(uname -a | grep Ubuntu)" ] && installnodeubuntu
-  [ -f "/etc/arch-release" ] && installnodearch
-  [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
-  sudo npm i -g neovim
-}
-
-installpiponmac() { \
-  sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  python3 get-pip.py
-  rm get-pip.py
-}
-
-installpiponubuntu() { \
-  sudo apt install python3-pip > /dev/null
-}
-
-installpiponarch() { \
-  pacman -S python-pip
-}
-
-installpip() { \
-  echo "Installing pip..."
-  [ "$(uname)" == "Darwin" ] && installpiponmac
-  [  -n "$(uname -a | grep Ubuntu)" ] && installpiponubuntu
-  [ -f "/etc/arch-release" ] && installpiponarch
-  [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
-}
-
-installpynvim() { \
-  echo "Installing pynvim..."
-  pip3 install pynvim
+installnodedeb() { \
+  if $(command -v sudo); then
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  else
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+  fi
+  $SUDO apt-get install -y nodejs
 }
 
 installcocextensions() { \
@@ -62,8 +36,37 @@ installcocextensions() { \
   cd ~/.config/coc/extensions
   [ ! -f package.json ] && echo '{"dependencies":{}}'> package.json
   # Change extension names to the extensions you need
-  sudo npm install coc-explorer coc-snippets coc-json coc-actions bash-language-server \
+  $SUDO npm install coc-explorer coc-snippets coc-json coc-actions bash-language-server \
            --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+}
+
+installnode() { \
+  echo "Installing node..."
+  [ "$(uname)" == "Darwin" ] && installnodemac
+  [ $(command -v apt-get) ] && installnodedeb
+  $SUDO npm i -g neovim
+}
+
+installpipmac() { \
+  $SUDO curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  python3 get-pip.py
+  rm get-pip.py
+}
+
+installpipdeb() { \
+  $SUDO apt-get install -y python3-pip > /dev/null
+}
+
+installpip() { \
+  echo "Installing pip..."
+  [ "$(uname)" == "Darwin" ] && installpipmac
+  [ $(command -v apt-get) ] && installpipdeb
+}
+
+installpippackages() { \
+  echo "Installing pip packages..."
+  pip3 install --upgrade pip
+  pip3 install black flake8 isort pynvim
 }
 
 cloneconfig() { \
@@ -90,63 +93,74 @@ installplugins() { \
   mv $HOME/.config/nvim/init.vim.tmp $HOME/.config/nvim/init.vim
 }
 
-asktoinstallnode() { \
-  echo "node not found"
-  echo -n "Would you like to install node now (y/n)? "
-  read answer
-  [ "$answer" != "${answer#[Yy]}" ] && installnode && installcocextensions
+installnvimsource() { \
+  # Build from source
+  $SUDO apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+  git clone -b stable https://github.com/neovim/neovim
+  cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+  $SUDO make install && cd .. && rm -rf neovim
 }
 
-asktoinstallpip() { \
-  # echo "pip not found"
-  # echo -n "Would you like to install pip now (y/n)? "
-  # read answer
-  # [ "$answer" != "${answer#[Yy]}" ] && installpip
-  echo "Please install pip3 before continuing with install"
-  exit
+installnvimdeb() { \
+  if [ $(dpkg --print-architecture | grep "amd") ]; then
+    # Try building from appimage
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+    ./nvim.appimage --appimage-extract \
+        && $SUDO mv -f squashfs-root/bin/nvim /usr/local/bin/nvim \
+        || installnvimsource
+  else
+    installnvimsource
+  fi
 }
 
-installonmac() { \
-  brew install ripgrep fzf ranger
+installnvimmac() { \
+  brew install neovim
 }
 
-pipinstallueberzug() { \
-  which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
+installnvim() { \
+  echo "Installing Neovim..."
+  [ "$(uname)" == "Darwin" ] && installnvimmac
+  [ $(command -v apt-get) ] && installnvimdeb
 }
 
-installonubuntu() { \
-  sudo apt install ripgrep fzf ranger
-  sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
-  pip3 install ueberzug
-  pip3 install neovim-remote
+installfontdeb() { \
+  # mkdir -p ~/.local/share/fonts
+  # cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+  $SUDO apt-get install -y fonts-hack-ttf
 }
 
-
-installonarch() { \
-  sudo pacman -S install ripgrep fzf ranger
-  which yay > /dev/null && yay -S python-ueberzug-git || pipinstallueberzug
-  pip3 install neovim-remote
+installfontmac() { \
+  brew install --cask font-hack-nerd-font
 }
 
-installextrapackages() { \
-  [ "$(uname)" == "Darwin" ] && installonmac
-  [  -n "$(uname -a | grep Ubuntu)" ] && installonubuntu
-  [ -f "/etc/arch-release" ] && installonarch
-  [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
+installfont() { \
+  echo "Installing font..."
+  [ "$(uname)" == "Darwin" ] && installfontmac
+  [ $(command -v apt-get) ] && installfontdeb
 }
 
 # Welcome
-echo 'Installing Vim environment'
+echo "Installing Vim environment"
+
+[ ! "$(uname)" == "Darwin" ] && [ ! $(command -v apt-get) ] && echo "OS not supported" && exit
+
+if $(command -v sudo); then
+    SUDO=sudo
+else
+    SUDO=""
+fi
+
+installreqs
 
 # install pip
-which pip3 > /dev/null && echo "pip installed, moving on..." || asktoinstallpip
+[ $(command -v pip3) ] && echo "pip installed, moving on..." || installpip
 
 # install node and neovim support
-which node > /dev/null && echo "node installed, moving on..." || asktoinstallnode
-
+[ $(command -v node) ] && echo "node installed, moving on..." || installnode
 
 # install pynvim
-pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
+installpippackages
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
@@ -157,16 +171,18 @@ pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || 
 # clone config down
 cloneconfig
 
-# echo "Nvim Mach 2 is better with at least ripgrep, ueberzug and ranger"
-# echo -n "Would you like to install these now?  (y/n)? "
-# read answer
-# [ "$answer" != "${answer#[Yy]}" ] && installextrapackages || echo "not installing extra packages"
+# install neovim
+echo "Checking for neovim"
+[ $(command -v nvim) ] && echo "neovim installed, moving on..." || installnvim
 
 # install plugins
-which nvim > /dev/null && installplugins
+installplugins
 
+# install CoC extensions
 installcocextensions
 
-echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
+# echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
+installfont
 
-echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
+# echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
+# [ $(command -v apt-get) ] && mkdir -p ~/.config/ranger && echo "set preview_images_method ueberzug" >> ~/.config/ranger/rc.conf
