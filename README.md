@@ -24,4 +24,3 @@ The installation script will install the following dependencies if they are miss
 - fzf
 - ripgrep
 - ranger
-- xsel (for clipboard support, Linux only)
