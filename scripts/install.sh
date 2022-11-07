@@ -80,7 +80,7 @@ installpippackages() { \
 
 cloneconfig() { \
   echo "Cloning Vim configuration"
-  git clone https://github.com/jeffmm/nvim.git ~/.config/nvim
+  git clone --depth=1 https://github.com/jeffmm/nvim.git ~/.config/nvim
 }
 
 moveoldnvim() { \
@@ -95,10 +95,10 @@ moveoldcoc() { \
 
 installplugins() { \
   mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.tmp
-  mv $HOME/.config/nvim/utils/init.vim $HOME/.config/nvim/init.vim
+  mv $HOME/.config/nvim/scripts/init.vim $HOME/.config/nvim/init.vim
   echo "Installing plugins..."
   nvim --headless +PlugInstall +qall > /dev/null 2>&1
-  mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/utils/init.vim
+  mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/scripts/init.vim
   mv $HOME/.config/nvim/init.vim.tmp $HOME/.config/nvim/init.vim
 }
 
