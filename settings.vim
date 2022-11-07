@@ -44,6 +44,8 @@ set guifont=Hack\ Nerd\ Font
 set iskeyword+=-                      	" treat dash separated words as a word text object
 autocmd FileType * setlocal formatoptions-=cor  " Properly wrap comments
 set backspace=indent,eol,start          " enable backspace
+set viminfo='100,n$HOME/.config/nvim/viminfo  " Set viminfo, missing on some OS's
+
 
 if has('python3')
     set pyx=3

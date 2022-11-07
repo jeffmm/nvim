@@ -1,6 +1,3 @@
-" Set viminfo, missing on some OS's
-set viminfo='100,n$HOME/.config/nvim/viminfo
-
 " Install plugins
 source $HOME/.config/nvim/plugins.vim
 " Config settings
@@ -27,5 +24,4 @@ source $HOME/.config/nvim/plugins/floaterm.vim
 source $HOME/.config/nvim/plugins/xtabline.vim
 source $HOME/.config/nvim/plugins/far.vim
 source $HOME/.config/nvim/plugins/markdown-highlighting.vim
-"
 source $HOME/.config/nvim/plugins/ctrl-p.vim
