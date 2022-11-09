@@ -116,7 +116,7 @@ installnvimdeb() { \
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
     ./nvim.appimage --appimage-extract \
-        && $SUDO mv -f squashfs-root/bin/nvim /usr/local/bin/nvim \
+        && $SUDO mv -f squashfs-root/usr/bin/nvim /usr/local/bin/nvim \
         || installnvimsource
   else
     installnvimsource
