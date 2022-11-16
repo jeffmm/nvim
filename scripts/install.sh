@@ -8,7 +8,14 @@ installreqmac() { \
 }
 
 installreqdeb() { \
-  $SUDO apt-get update -y && $SUDO apt-get install -y curl git ripgrep fzf ranger
+  $SUDO apt-get update -y && $SUDO apt-get install -y curl git ranger
+  # Try to install each of these, and if missing, install with conda if it exists
+  $SUDO apt-get install -y fzf 
+  $SUDO apt-get install -y ripgrep
+  if [ $(command -v conda) ]; then
+      [ $(command -v fzf) ] || conda install -c conda-forge fzf
+      [ $(command -v ripgrep) ] || conda install -c conda-forge ripgrep
+  fi
   [ ! -f /etc/timezone ] && $SUDO echo America/Denver >> /etc/timezone
 }
 
