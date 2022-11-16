@@ -23,9 +23,9 @@ installnodemac() { \
 
 installnodedeb() { \
   if $(command -v sudo); then
-    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+    curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
   else
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
   fi
   $SUDO apt-get install -y nodejs
 }
