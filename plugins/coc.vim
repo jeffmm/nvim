@@ -1,6 +1,7 @@
 "
 " COC SETTINGS
 " 
+
 let g:coc_global_extensions = [
    \ 'coc-snippets',
    \ 'coc-actions',
@@ -50,6 +51,15 @@ function! s:show_documentation()
  endif
 endfunction
 
+" Use tab and shift-tab to navigate autocompletion tolower
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 if exists('*complete_info')
@@ -81,16 +91,16 @@ let g:coc_explorer_global_presets = {
 \ }
 
 " Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-     \ pumvisible() ? "\<C-n>" :
-     \ <SID>check_back_space() ? "\<TAB>" :
-     \ coc#refresh()
-" "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+     " \ pumvisible() ? "\<C-n>" :
+     " \ <SID>check_back_space() ? "\<TAB>" :
+     " \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
- let col = col('.') - 1
- return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+ " let col = col('.') - 1
+ " return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 " Fix for broken isort-on-save
 au BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
