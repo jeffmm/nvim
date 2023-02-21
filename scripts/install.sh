@@ -193,6 +193,10 @@ cloneconfig
 echo "Checking for neovim"
 [ $(command -v nvim) ] && echo "neovim installed, moving on..." || installnvim
 
+# update python paths in coc-settings
+pypath=$(which python3 | perl -pe "s~([a-zA-Z0-9\/]*)/bin/[a-zA-Z0-9\/]*~\1~g")
+perl -pi -e "s~[a-zA-Z0-9\/]*(/bin/[a-zA-Z0-9\/]*)~$pypath\1~g" "$HOME/.config/nvim/coc-settings.json"
+
 # install plugins
 installplugins
 

@@ -33,25 +33,38 @@
   ],
   "coc.preferences.willSaveHandlerTimeout": "1000ms",
   // python config - turn pyright type checking off, but lint with mypy and flake8
-  "python.pythonPath": "/usr/local/bin/python",
+  "python.pythonPath": "/opt/homebrew/bin/python3",
   "python.analysis.typeCheckingMode": "off",
   "python.linting.lintOnSave": true,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "/usr/local/bin/flake8",
+  "python.linting.flake8Path": "/opt/homebrew/bin/flake8",
   "python.linting.flake8Args": [
+    "--exclude=.git,__pycache__,data,docs",
     "--max-line-length=88",
-    "--ignore=D203,E203,W503",
-    "--max-complexity=10"
+    "--max-complexity=10",
+    "--ignore=D203,E203,W503"
   ],
   "python.linting.pydocstyleEnabled": true,
   "python.linting.pydocstyleArgs": ["--convention=google"],
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/usr/local/bin/black",
-  "python.formatting.blackArgs": ["--line-length=88", "--target-version=py36"],
-  "python.sortImports.path": "/usr/local/bin/isort",
-
+  "python.formatting.blackPath": "/opt/homebrew/bin/black",
+  "python.formatting.blackArgs": [
+      "--line-length=88",
+      "--target-version=py36"
+  ],
+  "pyright.organizeimports.provider": "isort",
+  "python.sortImports.path": "/opt/homebrew/bin/isort",
+  "python.sortImports.args": ["--profile", "black"],
+  // "python.sortImports.args": [
+      // "--multi_line_output=3",
+      // "--include_trailing_comma=True",
+      // "--force_grid_wrap=0",
+      // "--use_parentheses=True",
+      // "--line_length=88",
+      // "--profile=black"
+  // ],
   // snippets
   "snippets.ultisnips.directories": ["~/.config/nvim/snips", "UltiSnips"],
   "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
