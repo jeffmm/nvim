@@ -31,7 +31,7 @@
     "java",
     "go"
   ],
-  "coc.preferences.willSaveHandlerTimeout": "1000ms",
+  "coc.preferences.willSaveHandlerTimeout": 1000,
   // python config - turn pyright type checking off, but lint with mypy and flake8
   "python.pythonPath": "/opt/homebrew/bin/python3",
   "python.analysis.typeCheckingMode": "off",
