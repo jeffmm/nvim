@@ -25,3 +25,4 @@ source $HOME/.config/nvim/plugins/xtabline.vim
 source $HOME/.config/nvim/plugins/far.vim
 source $HOME/.config/nvim/plugins/markdown-highlighting.vim
 source $HOME/.config/nvim/plugins/ctrl-p.vim
+source $HOME/.config/nvim/plugins/copilot.vim
