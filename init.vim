@@ -22,6 +22,7 @@ source $HOME/.config/nvim/plugins/gitgutter.vim
 source $HOME/.config/nvim/plugins/git-messenger.vim
 source $HOME/.config/nvim/plugins/floaterm.vim
 source $HOME/.config/nvim/plugins/xtabline.vim
+source $HOME/.config/nvim/plugins/remote-containers.vim
 source $HOME/.config/nvim/plugins/far.vim
 source $HOME/.config/nvim/plugins/markdown-highlighting.vim
 source $HOME/.config/nvim/plugins/ctrl-p.vim

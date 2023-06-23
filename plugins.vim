@@ -30,8 +30,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'sainnhe/gruvbox-material'
   " Intellisense
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " AI Completion
+  " AI-assisted completion
   Plug 'github/copilot.vim'
+  " Develop in containers
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'jamestthompson3/nvim-remote-containers', { 'do': ':TSInstall jsonc' }
   " Status line and tab line
   Plug 'vim-airline/vim-airline'
   Plug 'mg979/vim-xtabline'

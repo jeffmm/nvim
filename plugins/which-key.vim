@@ -74,10 +74,9 @@ let g:which_key_map.f = {
 :command! DocstringFull :normal o"""Short docstring<CR><CR>Extended Docstring<CR><CR>Args:<CR>var1 (type): Input variable<CR><Enter><C-D>Returns:<CR>(type): Returned variable<CR><CR><C-D>"""<ESC>
 :command! DocstringShort :normal o""""""<ESC>hhi
 let g:which_key_map.d = {
-    \ 'name' : '+docstrings' ,
-    \ 't'    : [':InsertDate', 'insert date'],
-    \ 'f'    : [':DocstringFull' , 'insert full docstring'],
-    \ 's'    : [':DocstringShort', 'insert short docstring'],
+    \ 'name' : '+Docker' ,
+    \ 'a'    : [':AttachToContainer', 'attach to container'],
+    \ 's'    : [':StartImage' , 'start container'],
     \ }
 "
 " s is for search

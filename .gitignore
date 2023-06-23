@@ -6,3 +6,4 @@ journal
 .netrwhist
 undodir
 viminfo
+coc-settings.json

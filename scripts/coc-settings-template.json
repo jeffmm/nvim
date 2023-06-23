@@ -17,18 +17,9 @@
   "list.selectedSignText": " ",
 
   // autoformat
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python",
-    "java",
-    "go"
-  ],
+  "[css][markdown][javascript][graphql][html][yaml][json][python][java][go]": {
+    "coc.preferences.formatOnSave": true
+  },
   "coc.preferences.willSaveHandlerTimeout": 1000,
   // python config - turn pyright type checking off, but lint with mypy and flake8
   "python.pythonPath": "__PYTHON3__",
