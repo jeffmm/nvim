@@ -1,6 +1,6 @@
 "
 " WIKI SETTINGS
-let g:wiki_root = '~/.vim/wiki'
+let g:wiki_root = '~/.config/nvim/wiki'
 let g:wiki_filetypes = ['md']
 let g:wiki_link_extension = '.md'"
 let g:wiki_global_load = 0
