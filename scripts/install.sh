@@ -216,10 +216,10 @@ initcocsettings() { \
     # initialize coc-settings.json if it doesn't already exist
     if [ ! -f "$HOME/.config/nvim/coc-settings.json" ]; then
         cp "$HOME/.config/nvim/scripts/coc-settings-template.json" "$HOME/.config/nvim/coc-settings.json"
-        perl -pi -e "s~__PYTHON3__~$(which python3)~g" "$HOME/.config/nvim/scripts/coc-settings.json"
-        perl -pi -e "s~__FLAKE8__~$(which flake8)~g" "$HOME/.config/nvim/scripts/coc-settings.json"
-        perl -pi -e "s~__BLACK__~$(which black)~g" "$HOME/.config/nvim/scripts/coc-settings.json"
-        perl -pi -e "s~__ISORT__~$(which isort)~g" "$HOME/.config/nvim/scripts/coc-settings.json"
+        perl -pi -e "s~__PYTHON3__~$(which python3)~g" "$HOME/.config/nvim/coc-settings.json"
+        perl -pi -e "s~__FLAKE8__~$(which flake8)~g" "$HOME/.config/nvim/coc-settings.json"
+        perl -pi -e "s~__BLACK__~$(which black)~g" "$HOME/.config/nvim/coc-settings.json"
+        perl -pi -e "s~__ISORT__~$(which isort)~g" "$HOME/.config/nvim/coc-settings.json"
     fi
 }
 
