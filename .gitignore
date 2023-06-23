@@ -1,6 +1,7 @@
 tags*
 autoload
-wiki
+wiki/*
+!wiki/.gitkeep
 journal
 .netrwhist
 undodir

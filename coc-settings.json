@@ -31,13 +31,13 @@
   ],
   "coc.preferences.willSaveHandlerTimeout": 1000,
   // python config - turn pyright type checking off, but lint with mypy and flake8
-  "python.pythonPath": "/usr/local/bin/python3",
+  "python.pythonPath": "__PYTHON3__",
   "python.analysis.typeCheckingMode": "off",
   "python.linting.lintOnSave": true,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "/usr/local/bin/flake8",
+  "python.linting.flake8Path": "__FLAKE8__",
   "python.linting.flake8Args": [
     "--exclude=.git,__pycache__,data,docs",
     "--max-line-length=88",
@@ -47,10 +47,10 @@
   "python.linting.pydocstyleEnabled": true,
   "python.linting.pydocstyleArgs": ["--convention=google"],
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/usr/local/bin/black",
+  "python.formatting.blackPath": "__BLACK__",
   "python.formatting.blackArgs": ["--line-length=88", "--target-version=py36"],
   "pyright.organizeimports.provider": "isort",
-  "python.sortImports.path": "/usr/local/bin/isort",
+  "python.sortImports.path": "__ISORT__",
   "python.sortImports.args": ["--profile", "black"],
   // snippets
   "snippets.ultisnips.directories": ["~/.config/nvim/snips", "UltiSnips"],

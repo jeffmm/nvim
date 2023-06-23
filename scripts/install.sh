@@ -149,7 +149,8 @@ installfontdeb() { \
 }
 
 installfontmac() { \
-  brew install --cask font-hack-nerd-font || echo "font installed"
+  brew tap homebrew/cask-fonts
+  brew install font-hack-nerd-font || echo "font installed"
 }
 
 installfont() { \
@@ -194,8 +195,10 @@ echo "Checking for neovim"
 [ $(command -v nvim) ] && echo "neovim installed, moving on..." || installnvim
 
 # update python paths in coc-settings
-pypath=$(which python3 | perl -pe "s~([a-zA-Z0-9\/]*)/bin/[a-zA-Z0-9\/]*~\1~g")
-perl -pi -e "s~[a-zA-Z0-9\/]*(/bin/[a-zA-Z0-9\/]*)~$pypath\1~g" "$HOME/.config/nvim/coc-settings.json"
+perl -pi -e "s/__PYTHON3__/$(which python3)/g" "$HOME/.config/nvim/coc-settings.json"
+perl -pi -e "s/__FLAKE8__/$(which flake8)/g" "$HOME/.config/nvim/coc-settings.json"
+perl -pi -e "s/__BLACK__/$(which black)/g" "$HOME/.config/nvim/coc-settings.json"
+perl -pi -e "s/__ISORT__/$(which isort)/g" "$HOME/.config/nvim/coc-settings.json"
 
 # install plugins
 installplugins
