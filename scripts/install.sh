@@ -235,6 +235,8 @@ case $(uname) in
     "Linux")
         if grep -q "ID_LIKE=debian" /etc/os-release; then
             OS="deb"
+        elif grep -q "ID=debian" /etc/os-release; then
+            OS="deb"
         elif grep -q "Amazon Linux" /etc/os-release; then
             OS="amz"
         else
