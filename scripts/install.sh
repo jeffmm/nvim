@@ -15,8 +15,8 @@ installreqs() { \
         $SUDO apt-get install -y fzf 
         $SUDO apt-get install -y ripgrep
         if [ "$(command -v conda)" ]; then
-            [ "$(command -v fzf)" ] || conda install -c conda-forge fzf
-            [ "$(command -v ripgrep)" ] || conda install -c conda-forge ripgrep
+            [ "$(command -v fzf)" ] || conda install -c conda-forge fzf -y
+            [ "$(command -v ripgrep)" ] || conda install -c conda-forge ripgrep -y
         fi
         DEBIAN_FRONTEND=noninteractive TZ="US/Mountain" $SUDO apt-get install -y tzdata
     }
