@@ -262,7 +262,7 @@ installreqs
 if command -v pip3 &> /dev/null; then echo "pip installed, moving on..."; else installpip; fi
 
 # install node and neovim support
-if command -v node &> /dev/null; then echo "node installed, moving on..."; else installnode; fi
+if command -v npm &> /dev/null; then echo "node installed, moving on..."; else installnode; fi
 
 # install pip packages
 installpippackages
