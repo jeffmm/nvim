@@ -31,7 +31,7 @@
   "python.linting.flake8Path": "__FLAKE8__",
   "python.linting.flake8Args": [
     "--exclude=.git,__pycache__,data,docs",
-    "--max-line-length=88",
+    "--max-line-length=100",
     "--max-complexity=10",
     "--ignore=D203,E203,W503"
   ],
@@ -39,7 +39,7 @@
   "python.linting.pydocstyleArgs": ["--convention=google"],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "__BLACK__",
-  "python.formatting.blackArgs": ["--line-length=88", "--target-version=py36"],
+  "python.formatting.blackArgs": ["--line-length=100", "--target-version=py36"],
   "pyright.organizeimports.provider": "isort",
   "python.sortImports.path": "__ISORT__",
   "python.sortImports.args": ["--profile", "black"],

@@ -5,12 +5,12 @@ set -o nounset    # error when referencing undefined variable
 
 installreqs() { \
     installreqmac() { \
-        brew install ripgrep fzf ranger
+        brew install ripgrep fzf
     }
 
     installreqdeb() { \
         [ ! -f /etc/timezone ] && $SUDO echo America/Denver >> /etc/timezone
-        $SUDO apt-get update -y && $SUDO apt-get install -y curl git ranger software-properties-common
+        $SUDO apt-get update -y && $SUDO apt-get install -y curl git software-properties-common
         # Try to install fzf and rg, and if it fails install from conda if available
         $SUDO apt-get install -y fzf 
         $SUDO apt-get install -y ripgrep
@@ -125,7 +125,7 @@ installpip() { \
 installpippackages() { \
     echo "Installing pip packages..."
     pip3 install --upgrade pip
-    pip3 install --upgrade black flake8 isort neovim
+    pip3 install --upgrade black flake8 isort neovim ranger-fm
 }
 
 cloneconfig() { \
