@@ -48,6 +48,14 @@ let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
 let g:which_key_map['Z'] = [ 'Goyo'                               , 'zen' ]
 
 " Group mappings
+let g:which_key_map.j = {
+      \ 'name' : '+Jupyter' ,
+      \ 'i' : [':MoltenInit' , 'initialize kernel'],
+      \ 'j' : [':MoltenEvaluateOperator'    , 'run operator selection'],
+      \ 'l' : [':MoltenEvaluateLine', 'evaluate line'],
+      \ 'r' : [':MoltenReevaluateCell'  , 're-evaluate cell'],
+      \ 'v' : [':<C-u>MoltenEvaluateVisual<CR>gv'  , 'evaluate visual selection'],
+      \ }
 
 " b is for buffer
 let g:which_key_map.b = {

@@ -20,14 +20,16 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Note taking
   Plug 'jeffmm/wiki.vim'
   " Encryption
-  Plug 'jeffmm/crypt.vim'
+  " Plug 'jeffmm/crypt.vim'
   " Text Navigation
   Plug 'easymotion/vim-easymotion'
   " Cool Icons
   Plug 'ryanoasis/vim-devicons'
   " Themes
-  Plug 'gruvbox-community/gruvbox'
-  Plug 'sainnhe/gruvbox-material'
+  " Plug 'gruvbox-community/gruvbox'
+
+  " Plug 'sainnhe/gruvbox-material'
+  Plug 'sainnhe/everforest'
   " Intellisense
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " AI-assisted completion
@@ -77,7 +79,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'mattn/vim-gist'
   " Easily delete buffers
   Plug 'moll/vim-bbye'
-
+  " View images
+  Plug '3rd/image.nvim'
+  " Jupyter
+  Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 " Automatically install missing plugins on startup

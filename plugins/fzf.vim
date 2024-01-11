@@ -19,7 +19,7 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_layout = {'down':'~40%'}
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/**' -g '!*.{ipynb,jpg,png,pdf}'"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/**' -g '!*.{jpg,png,pdf}'"
 
                                \
 " Customize fzf colors to match your color scheme

@@ -10,17 +10,20 @@ aug i3config_ft_detection
   au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
 aug end
 
-" GRUVBOX SETTINGS
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+" if has('termguicolors')
+  " set termguicolors
+" endif
 
 set background=light
-" let g:gruvbox_contrast_light = 'hard'
-let g:gruvbox_material_background = 'soft'
-colorscheme gruvbox-material
+let g:everforest_background = 'soft'
+let g:everforest_better_performance = 1
+
+colorscheme everforest
 
 hi Comment cterm=italic
 
@@ -56,7 +59,7 @@ let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning'
 silent! let g:airline_section_c = airline#section#create([''])
 
 " Switch to your current theme
-let g:airline_theme = 'gruvbox_material'
+let g:airline_theme = 'everforest'
 
 " Sections
 let g:airline_section_y = ''

@@ -51,6 +51,8 @@ if has('python3')
     set pyx=3
 endif
 
+let g:python3_host_prog=expand("~/.virtualenvs/neovim/bin/python3")
+
 " Highlight search results only while searching
 augroup vimrc-incsearch-highlight
     autocmd!
