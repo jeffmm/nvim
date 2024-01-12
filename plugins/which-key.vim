@@ -16,7 +16,7 @@ nnoremap <leader>? :CocSearch <C-R>=expand("<cword>")<CR><CR>
 let g:which_key_map['?'] = 'search word'
 
 " Not a fan of floating windows for this
-let g:which_key_use_floating_win = 0
+let g:which_key_use_floating_win = 1
 
 " Change the colors if you want
 highlight default link WhichKey          Operator
@@ -29,6 +29,9 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+function! MoltenVisualEval() abort range
+    call MoltenEvaluateRange(a:firstline, a:lastline)
+endfunction
 
 " Single mappings
 let g:which_key_map['c'] = [ ':call Comment()'                    , 'comment' ]
@@ -48,13 +51,20 @@ let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
 let g:which_key_map['Z'] = [ 'Goyo'                               , 'zen' ]
 
 " Group mappings
-let g:which_key_map.j = {
+let g:which_key_map.m = {
       \ 'name' : '+Jupyter' ,
       \ 'i' : [':MoltenInit' , 'initialize kernel'],
-      \ 'j' : [':MoltenEvaluateOperator'    , 'run operator selection'],
+      \ 'm' : [':MoltenEvaluateOperator'    , 'run operator selection'],
       \ 'l' : [':MoltenEvaluateLine', 'evaluate line'],
       \ 'r' : [':MoltenReevaluateCell'  , 're-evaluate cell'],
-      \ 'v' : [':<C-u>MoltenEvaluateVisual<CR>gv'  , 'evaluate visual selection'],
+      \ 'v' : [':call MoltenVisualEval()<CR>v'  , 'evaluate visual selection'],
+      \ 'o' : [':noautocmd MoltenEnterOutput', 'enter output'],
+      \ 'I' : [':MoltenInterrupt',   'interrupt evaluation'],
+      \ 'R' : [':MoltenRestart', 'restart kernel'],
+      \ 'A' : [':MoltenReevaluateAll', 'revaluate all'],
+      \ 'D' : [':MoltenDelete', 'restart kernel'],
+      \ 'n' : [':MoltenNext', 'goto next cell'],
+      \ 'N' : [':MoltenPrev', 'goto prev cell'],
       \ }
 
 " b is for buffer
@@ -241,7 +251,7 @@ let g:which_key_map.w = {
             \ 'x': ['<plug>(wiki-reload)'   , 'reload wiki'],
             \ }
 
-let g:which_key_map.m = {
+let g:which_key_map.M = {
             \ 'name' : '+markdown',
             \ 'p' : [':MarkdownPreview'     , 'preview'],
             \ 'x' : [':call markdown#SwitchStatus()<CR>'    , 'checklist'],

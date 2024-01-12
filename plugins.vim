@@ -83,6 +83,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug '3rd/image.nvim'
   " Jupyter
   Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'GCBallesteros/jupytext.nvim'
+  Plug 'quarto-dev/quarto.nvim'
+  Plug 'jmbuhr/otter.nvim'
 call plug#end()
 
 " Automatically install missing plugins on startup

@@ -27,3 +27,5 @@ source $HOME/.config/nvim/plugins/ctrl-p.vim
 source $HOME/.config/nvim/plugins/copilot.vim
 source $HOME/.config/nvim/plugins/molten.vim
 luafile $HOME/.config/nvim/plugins/image.lua
+luafile $HOME/.config/nvim/plugins/jupytext.lua
+luafile $HOME/.config/nvim/plugins/quarto.lua
