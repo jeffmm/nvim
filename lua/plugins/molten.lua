@@ -1,7 +1,10 @@
 return {
   "benlubas/molten-nvim",
   dependencies = "3rd/image.nvim",
-  build = ":UpdateRemotePlugins",
+  build = function()
+    vim.cmd("runtime! plugin/rplugin.vim")
+    vim.cmd("UpdateRemotePlugins")
+  end,
   ft = { "python", "julia" },
   init = function()
     vim.g.molten_image_provider = "image.nvim"
