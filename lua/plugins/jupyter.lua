@@ -54,10 +54,10 @@ return {
 
       -- Output Window
       vim.g.molten_auto_open_output = true
-      -- vim.g.molten_output_win_max_height = 30
+      vim.g.molten_output_win_max_height = 30
 
       -- Virtual Text
-      vim.g.molten_virt_text_output = true
+      vim.g.molten_virt_text_output = false
     end,
     config = function()
       local keymap = vim.keymap.set
