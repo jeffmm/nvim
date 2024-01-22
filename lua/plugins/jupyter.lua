@@ -1,22 +1,35 @@
 return {
   {
     "GCBallesteros/NotebookNavigator.nvim",
-    -- keys = {
-    -- 	{
-    -- 		"]h",
-    -- 		function()
-    -- 			require("notebook-navigator").move_cell("d")
-    -- 		end,
-    -- 	},
-    -- 	{
-    -- 		"[h",
-    -- 		function()
-    -- 			require("notebook-navigator").move_cell("u")
-    -- 		end,
-    -- 	},
-    -- 	{ "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
-    -- 	{ "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
-    -- },
+    keys = {
+      {
+        "<leader>jn",
+        function()
+          local nb = [[
+{
+  "cells": [
+    {
+    "cell_type": "code",
+    "execution_count": null,
+    "metadata": {},
+    "outputs": [],
+    "source": []
+    }
+  ],
+  "metadata": {
+    "language_info": {
+    "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 2
+}]]
+          local buf = vim.api.nvim_create_buf(true, false)
+          vim.api.nvim_buf_set_lines(buf, 0, -1, true, vim.split(nb, "\n"))
+        end,
+        { desc = "New Notebook" },
+      },
+    },
     dependencies = {
       "echasnovski/mini.comment",
       -- "hkupty/iron.nvim", -- repl provider
@@ -27,7 +40,7 @@ return {
     event = "VeryLazy",
     config = function()
       local nn = require("notebook-navigator")
-      nn.setup({ activate_hydra_keys = "<leader>h" })
+      nn.setup({ activate_hydra_keys = "<leader>h", repl_provider = "molten", syntax_highlight = false })
     end,
   },
 
@@ -40,23 +53,21 @@ return {
       vim.g.molten_image_provider = "image.nvim"
 
       -- Output Window
-      vim.g.molten_auto_open_output = false
-      vim.g.molten_output_win_max_height = 30
+      vim.g.molten_auto_open_output = true
+      -- vim.g.molten_output_win_max_height = 30
 
       -- Virtual Text
       vim.g.molten_virt_text_output = true
     end,
     config = function()
       local keymap = vim.keymap.set
-      keymap("n", "<leader>jo", "<CMD>MoltenEvaluateOperator<CR>", { desc = "Evaluate Operator" })
-      keymap("n", "<leader>jl", "<CMD>MoltenEvaluateLine<CR>", { desc = "Evaluate Line" })
-      keymap("n", "<leader>jr", "<CMD>MoltenReevaluateCell<CR>", { desc = "Re-evaluate cell" })
+      keymap("n", "<leader>jx", "<CMD>MoltenReevaluateCell<CR>", { desc = "Re-evaluate cell" })
       keymap("n", "<leader>jd", "<CMD>MoltenDelete<CR>", { desc = "Delete cell" })
-      keymap("n", "<leader>js", "<CMD>MoltenEnterOutput<CR>", { desc = "Show/enter output window" })
+      keymap("n", "<leader>ji", "<CMD>noautocmd MoltenEnterOutput<CR>", { desc = "Show/enter output window" })
       keymap("n", "<leader>jh", "<CMD>MoltenHideOutput<CR>", { desc = "Hide output window" })
       keymap("n", "<leader>jj", "<CMD>MoltenNext<CR>", { desc = "Goto next cell" })
       keymap("n", "<leader>jk", "<CMD>MoltenPrev<CR>", { desc = "Goto prev cell" })
-      keymap("v", "X", ":<C-u>MoltenEvaluateVisual<CR>", { desc = "Evaluate visual selection" })
+      keymap("v", "gX", ":<C-u>MoltenEvaluateVisual<CR>", { desc = "Evaluate visual selection" })
     end,
   },
   {
