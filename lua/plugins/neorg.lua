@@ -4,11 +4,8 @@ return {
   build = ":Neorg sync-parsers",
   ft = "norg",
   keys = {
-    { "<leader>ni", ":Neorg index<CR>", desc = "Neorg Index", silent = true },
-    { "<leader>ns", ":e ~/notes/school/index.norg<CR>", desc = "Neorg School Index", silent = true },
-    { "<leader>nw", ":e ~/notes/work/index.norg<CR>", desc = "Neorg Work Index", silent = true },
-    { "<leader>nt", ":e ~/notes/tools/index.norg<CR>", desc = "Neorg Tools Index", silent = true },
-    { "<leader>nn", ":Neorg keybind norg core.dirman.new.note<CR>", desc = "New Note", silent = true },
+    { "<leader>ww", ":Neorg index<CR>", desc = "Neorg Index", silent = true },
+    { "<leader>wn", ":Neorg keybind norg core.dirman.new.note<CR>", desc = "New Note", silent = true },
     {
       "<A-CR>",
       ":Neorg keybind norg core.itero.next-iteration<CR>",
@@ -16,8 +13,8 @@ return {
       silent = true,
       mode = "i",
     },
-    { "<leader>jt", ":Neorg journal today<CR>", desc = "Journal Today", silent = true },
-    { "<leader>jy", ":Neorg journal yesterday<CR>", desc = "Journal Yesterday", silent = true },
+    { "<leader>wj", ":Neorg journal today<CR>", desc = "Journal Today", silent = true },
+    { "<leader>wy", ":Neorg journal yesterday<CR>", desc = "Journal Yesterday", silent = true },
   },
   dependencies = {
     { "pysan3/neorg-templates", dependencies = { "L3MON4D3/LuaSnip" } },
@@ -56,20 +53,20 @@ return {
             },
           },
         },
-        ["core.highlights"] = {
-          config = {
-            highlights = {
-              headings = {
-                ["1"] = { title = "+MoonflyCrimson", prefix = "+MoonflyCrimson" },
-                ["2"] = { title = "+MoonflyBlue", prefix = "+MoonflyBlue" },
-                ["3"] = { title = "+MoonflyKhaki", prefix = "+MoonflyKhaki" },
-                ["4"] = { title = "+MoonflyOrchid", prefix = "+MoonflyOrchid" },
-                ["5"] = { title = "+MoonflyCoral", prefix = "+MoonflyCoral" },
-                ["6"] = { title = "+MoonflyEmerald", prefix = "+MoonflyEmerald" },
-              },
-            },
-          },
-        },
+        -- ["core.highlights"] = {
+        --   config = {
+        --     highlights = {
+        --       headings = {
+        --         ["1"] = { title = "+MoonflyCrimson", prefix = "+MoonflyCrimson" },
+        --         ["2"] = { title = "+MoonflyBlue", prefix = "+MoonflyBlue" },
+        --         ["3"] = { title = "+MoonflyKhaki", prefix = "+MoonflyKhaki" },
+        --         ["4"] = { title = "+MoonflyOrchid", prefix = "+MoonflyOrchid" },
+        --         ["5"] = { title = "+MoonflyCoral", prefix = "+MoonflyCoral" },
+        --         ["6"] = { title = "+MoonflyEmerald", prefix = "+MoonflyEmerald" },
+        --       },
+        --     },
+        --   },
+        -- },
         ["core.journal"] = {
           config = {
             workspace = "notes",
@@ -121,10 +118,7 @@ return {
         ["core.dirman"] = {
           config = {
             workspaces = {
-              work = "~/notes/work",
-              school = "~/notes/school",
-              tools = "~/notes/tools",
-              notes = "~/notes",
+              notes = "/Volumes/zge-office/workspace/jeff/notes",
             },
             default_workspace = "notes",
           },

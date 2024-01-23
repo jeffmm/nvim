@@ -10,32 +10,32 @@
 -- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-vim.keymap.del("n", "<C-h>")  -- "<C-w>h", { desc = "Go to left window", remap = true })
-vim.keymap.del("n", "<C-j>")  -- "<C-w>j", { desc = "Go to lower window", remap = true })
-vim.keymap.del("n", "<C-k>")  -- "<C-w>k", { desc = "Go to upper window", remap = true })
-vim.keymap.del("n", "<C-l>")  -- "<C-w>l", { desc = "Go to right window", remap = true })
+vim.keymap.del("n", "<C-h>") -- "<C-w>h", { desc = "Go to left window", remap = true })
+vim.keymap.del("n", "<C-j>") -- "<C-w>j", { desc = "Go to lower window", remap = true })
+vim.keymap.del("n", "<C-k>") -- "<C-w>k", { desc = "Go to upper window", remap = true })
+vim.keymap.del("n", "<C-l>") -- "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-vim.keymap.del("n", "<C-Up>")  -- "<cmd>resize +2<cr>", { desc = "Increase window height" })
-vim.keymap.del("n", "<C-Down>")  -- "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-vim.keymap.del("n", "<C-Left>")  -- "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-vim.keymap.del("n", "<C-Right>")  -- "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+vim.keymap.del("n", "<C-Up>") -- "<cmd>resize +2<cr>", { desc = "Increase window height" })
+vim.keymap.del("n", "<C-Down>") -- "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+vim.keymap.del("n", "<C-Left>") -- "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+vim.keymap.del("n", "<C-Right>") -- "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
-vim.keymap.del("n", "<A-j>")  -- "<cmd>m .+1<cr>==", { desc = "Move down" })
-vim.keymap.del("n", "<A-k>")  -- "<cmd>m .-2<cr>==", { desc = "Move up" })
-vim.keymap.del("i", "<A-j>")  -- "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-vim.keymap.del("i", "<A-k>")  -- "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-vim.keymap.del("v", "<A-j>")  -- ":m '>+1<cr>gv=gv", { desc = "Move down" })
-vim.keymap.del("v", "<A-k>")  -- ":m '<-2<cr>gv=gv", { desc = "Move up" })
+vim.keymap.del("n", "<A-j>") -- "<cmd>m .+1<cr>==", { desc = "Move down" })
+vim.keymap.del("n", "<A-k>") -- "<cmd>m .-2<cr>==", { desc = "Move up" })
+vim.keymap.del("i", "<A-j>") -- "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.del("i", "<A-k>") -- "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.del("v", "<A-j>") -- ":m '>+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.del("v", "<A-k>") -- ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- buffers
-vim.keymap.del("n", "<S-h>")  -- "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-vim.keymap.del("n", "<S-l>")  -- "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.del("n", "[b")  -- "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-vim.keymap.del("n", "]b")  -- "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.del("n", "<leader>bb")  -- "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-vim.keymap.del("n", "<leader>`")  -- "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+vim.keymap.del("n", "<S-h>") -- "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.del("n", "<S-l>") -- "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.del("n", "[b") -- "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.del("n", "]b") -- "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.del("n", "<leader>bb") -- "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+vim.keymap.del("n", "<leader>`") -- "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Clear search with <esc>
 -- map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -124,7 +124,7 @@ vim.keymap.del("n", "<leader>`")  -- "<cmd>e #<cr>", { desc = "Switch to Other B
 
 -- lazygit
 -- map("n", "<leader>gg", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
--- map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+vim.keymap.del("n", "<leader>gG") -- , function() Util.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
 
 -- quit
 -- map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -152,12 +152,12 @@ vim.keymap.del("n", "<leader>`")  -- "<cmd>e #<cr>", { desc = "Switch to Other B
 -- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- windows
--- map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
--- map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
--- map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
--- map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
--- map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
--- map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+vim.keymap.del("n", "<leader>wd") -- "<C-W>c", { desc = "Delete window", remap = true })
+vim.keymap.del("n", "<leader>ww") -- "<C-W>p", { desc = "Other window", remap = true })
+vim.keymap.del("n", "<leader>w-") -- "<C-W>s", { desc = "Split window below", remap = true })
+vim.keymap.del("n", "<leader>w|") -- "<C-W>v", { desc = "Split window right", remap = true })
+vim.keymap.del("n", "<leader>-") --"<C-W>s", { desc = "Split window below", remap = true })
+vim.keymap.del("n", "<leader>|") --"<C-W>v", { desc = "Split window right", remap = true })
 
 -- tabs
 -- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
