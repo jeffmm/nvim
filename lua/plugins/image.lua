@@ -1,5 +1,5 @@
 return {
-  "3rd/image.nvim",
+  "jeffmm/image.nvim",
   enabled = true,
   opts = {
     backend = "kitty",
