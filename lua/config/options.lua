@@ -63,8 +63,7 @@ vim.opt.backspace = "indent,eol,start"
 
 -- searching
 vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.inccommand = "split"
+vim.opt.incsearch = false
 
 -- use indents of 2
 vim.opt.shiftwidth = 2

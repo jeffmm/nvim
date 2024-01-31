@@ -172,10 +172,10 @@ vim.keymap.del("n", "<leader>|") --"<C-W>v", { desc = "Split window right", rema
 -- vim.keymap.set("n", "<c-p>", ":bp<cr>", { desc = "prev buffer" })
 -- vim.keymap.set("n", "<c-x>", ":bd<cr>", { desc = "exit buffer" })
 
-vim.keymap.set("n", "J", "10gj")
-vim.keymap.set("n", "K", "10gk")
-vim.keymap.set("v", "J", "10gj")
-vim.keymap.set("v", "K", "10gk")
+-- vim.keymap.set("n", "J", "10gj")
+-- vim.keymap.set("n", "K", "10gk")
+-- vim.keymap.set("v", "J", "10gj")
+-- vim.keymap.set("v", "K", "10gk")
 
 vim.keymap.set("n", "<C-h>", "^")
 vim.keymap.set("n", "<C-l>", "$")
@@ -201,7 +201,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move block down"})
 
--- focus scrolling
+-- scrolling
 vim.keymap.set("n", "<C-j>", "<C-d>", { desc = "scroll down" })
 vim.keymap.set("n", "<C-k>", "<C-u>", { desc = "scroll up" })
 vim.keymap.set("v", "<C-j>", "<C-d>", { desc = "scroll down" })
