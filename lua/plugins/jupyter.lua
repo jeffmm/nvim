@@ -18,7 +18,8 @@ return {
 
   {
     "benlubas/molten-nvim",
-    dependencies = "3rd/image.nvim",
+    enabled = true,
+    dependencies = "jeffmm/image.nvim",
     build = ":UpdateRemotePlugins",
     ft = { "python", "julia" },
     init = function()
