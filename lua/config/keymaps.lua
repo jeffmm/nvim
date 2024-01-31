@@ -168,23 +168,23 @@ vim.keymap.del("n", "<leader>|") --"<C-W>v", { desc = "Split window right", rema
 -- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- buffers
-vim.keymap.set("n", "<c-n>", ":bn<cr>", { desc = "next buffer" })
-vim.keymap.set("n", "<c-p>", ":bp<cr>", { desc = "prev buffer" })
-vim.keymap.set("n", "<c-x>", ":bd<cr>", { desc = "exit buffer" })
+-- vim.keymap.set("n", "<c-n>", ":bn<cr>", { desc = "next buffer" })
+-- vim.keymap.set("n", "<c-p>", ":bp<cr>", { desc = "prev buffer" })
+-- vim.keymap.set("n", "<c-x>", ":bd<cr>", { desc = "exit buffer" })
 
 vim.keymap.set("n", "J", "10gj")
 vim.keymap.set("n", "K", "10gk")
 vim.keymap.set("v", "J", "10gj")
 vim.keymap.set("v", "K", "10gk")
 
-vim.keymap.set("n", "H", "^")
-vim.keymap.set("n", "L", "$")
-vim.keymap.set("v", "H", "^")
-vim.keymap.set("v", "L", "$")
+vim.keymap.set("n", "<C-h>", "^")
+vim.keymap.set("n", "<C-l>", "$")
+vim.keymap.set("v", "<C-h>", "^")
+vim.keymap.set("v", "<C-l>", "$")
 
 
 -- remove highlighting
-vim.keymap.set("n", "<esc><esc>", ":nohlsearch<cr>", { desc = "remove highlighting", silent = true })
+-- vim.keymap.set("n", "<esc><esc>", ":nohlsearch<cr>", { desc = "remove highlighting", silent = true })
 
 -- the worst place in the universe
 vim.keymap.set("n", "Q", "<nop>")
@@ -198,13 +198,18 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- move blocks
-vim.keymap.set("v", "<c-j>", ":m '>+1<CR>gv=gv", { desc = "move block up" })
-vim.keymap.set("v", "<c-k>", ":m '<-2<CR>gv=gv", { desc = "move block down"})
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move block up" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move block down"})
 
 -- focus scrolling
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "scroll down" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "scroll up" })
+vim.keymap.set("n", "<C-j>", "<C-d>", { desc = "scroll down" })
+vim.keymap.set("n", "<C-k>", "<C-u>", { desc = "scroll up" })
+vim.keymap.set("v", "<C-j>", "<C-d>", { desc = "scroll down" })
+vim.keymap.set("v", "<C-k>", "<C-u>", { desc = "scroll up" })
+
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "scroll down" })
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "scroll up" })
 
 -- focus highlight searches
-vim.keymap.set("n", "n", "nzzzv", { desc = "next match" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "prev match" })
+-- vim.keymap.set("n", "n", "nzzzv", { desc = "next match" })
+-- vim.keymap.set("n", "N", "Nzzzv", { desc = "prev match" })

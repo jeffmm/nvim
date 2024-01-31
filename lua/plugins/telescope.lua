@@ -43,7 +43,7 @@ return {
           base_dirs = {
             { path = "~/Projects", depth = 1 },
           },
-          hidden_files = true, -- default: false
+          hidden_files = false, -- default: false
           theme = "dropdown",
           order_by = "asc",
           search_by = "title",
