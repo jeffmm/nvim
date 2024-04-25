@@ -18,6 +18,7 @@ return {
 
   {
     "benlubas/molten-nvim",
+    version = "1.7.0",
     enabled = true,
     dependencies = "jeffmm/image.nvim",
     build = ":UpdateRemotePlugins",
