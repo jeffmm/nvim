@@ -22,7 +22,7 @@ return {
       dashboard.button("t", "󰱼    find text", ":Telescope live_grep_args<CR>"),
       dashboard.button("p", "󰥨    find projects", ":lua require'telescope'.extensions.project.project{}<CR>"),
       -- dashboard.button("h", "    browse git", ":Flog<CR>"),
-      dashboard.button("g", "    browse git", ":lua require('lazy.util').float_term({ 'lazygit' })<CR>"),
+      -- dashboard.button("g", "    browse git", ":lua require('lazy.util').float_term({ 'lazygit' })<CR>"),
       dashboard.button("l", "󰒲    lazy", ":Lazy<CR>"),
       dashboard.button("m", "󱌣    mason", ":Mason<CR>"),
       dashboard.button("P", "󰄉    profile", ":Lazy profile<CR>"),
