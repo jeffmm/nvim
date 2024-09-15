@@ -1,57 +1,45 @@
 return {
-	"folke/which-key.nvim",
-	keys = { "<leader>" },
-	config = function()
-		local which_key = require("which-key")
-
-		which_key.setup({
-			plugins = {
-				spelling = {
-					enabled = true,
-					suggestions = 20,
-				},
-			},
-			window = {
-				border = "shadow",
-				position = "bottom",
-				margin = { 0, 1, 1, 5 },
-				padding = { 1, 2, 1, 2 },
-			},
-			triggers_nowait = {
-				"`",
-				"'",
-				"g`",
-				"g'",
-				'"',
-				"<c-r>",
-				"z=",
-			},
-		})
-
-		local opts = {
-			prefix = "<leader>",
-		}
-
-		local groups = {
-			b = { name = "buffer" },
-			s = { name = "search" },
-			-- g = { name = "git" },
-			r = { name = "refactor" },
-			d = { name = "debug" },
-			m = { name = "macro/markdown" },
-			n = { name = "notifications" },
-			t = { name = "test" },
-			l = { name = "lsp" },
-			["<tab>"] = { name = "tabs" },
-			[";"] = { name = "test" },
-			["'"] = { name = "marks" },
-			["/"] = { name = "search" },
-			["/g"] = { name = "git" },
-			["/gd"] = { name = "diff" },
-			["["] = { name = "previous" },
-			["]"] = { name = "next" },
-		}
-
-		which_key.register(groups, opts)
-	end,
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  opts = {
+    plugins = {
+      spelling = {
+        enabled = true,
+        suggestions = 20,
+      },
+    },
+    win = {
+      border = "shadow",
+      -- position = "bottom",
+      -- margin = { 0, 1, 1, 5 },
+      padding = { 1, 2, 1, 2 },
+    },
+    spec = {
+      { "<leader>'", group = "marks" },
+      { "<leader>/", group = "search" },
+      { "<leader>/g", group = "git" },
+      { "<leader>/gd", group = "diff" },
+      { "<leader>;", group = "test" },
+      { "<leader><tab>", group = "tabs" },
+      { "<leader>[", group = "previous" },
+      { "<leader>]", group = "next" },
+      { "<leader>b", group = "buffer" },
+      { "<leader>d", group = "debug" },
+      { "<leader>l", group = "lsp" },
+      { "<leader>m", group = "macro/markdown" },
+      { "<leader>n", group = "notifications" },
+      { "<leader>r", group = "refactor" },
+      { "<leader>s", group = "search" },
+      { "<leader>t", group = "test" },
+    },
+  },
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
 }

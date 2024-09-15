@@ -12,21 +12,68 @@ return {
       -- vim.api.nvim_set_hl(0, "DapLogPoint", { link = "MoonflyCrimson" })
       -- vim.api.nvim_set_hl(0, "DapStopped", { link = "MoonflyEmerald" })
 
+      local dap = require("dap")
+      dap.adapters.godot = {
+        type = "server",
+        host = "127.0.0.1",
+        port = 6006,
+      }
+
+      dap.configurations.gdscript = {
+        {
+          type = "godot",
+          request = "launch",
+          name = "Launch scene",
+          project = "${workspaceFolder}",
+          launch_scene = true,
+        },
+      }
       vim.fn.sign_define("DapBreakpoint", { text = "ඞ", texthl = "DapBreakpoint", numhl = "DapBreakpoint" })
       vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpoint", numhl = "DapBreakpoint" })
       vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", numhl = "DapLogPoint" })
-      vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+      vim.fn.sign_define(
+        "DapStopped",
+        { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+      )
     end,
     keys = {
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "toggle breakpoint" },
-      { "<leader>dc", function()
-        vim.ui.input({ prompt = "Conditional Breakpoint: " }, function(input)
-          require("dap").toggle_breakpoint(input)
-        end)
-      end , "conditional breakpoint"},
-      { "<leader>dr", function() require("dap").continue() end, desc = "run the debugger, or run the code" },
-      { "<leader>ds", function() require("dap").step_over() end, desc = "step over" },
-      { "<leader>dS", function() require("dap").step_into() end, desc = "Step into" },
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "toggle breakpoint",
+      },
+      {
+        "<leader>dc",
+        function()
+          vim.ui.input({ prompt = "Conditional Breakpoint: " }, function(input)
+            require("dap").toggle_breakpoint(input)
+          end)
+        end,
+        "conditional breakpoint",
+      },
+      {
+        "<leader>dr",
+        function()
+          require("dap").continue()
+        end,
+        desc = "run the debugger, or run the code",
+      },
+      {
+        "<leader>ds",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "step over",
+      },
+      {
+        "<leader>dS",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "Step into",
+      },
     },
   },
   { "theHamsta/nvim-dap-virtual-text", config = true },
@@ -35,7 +82,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     opts = {
       ensure_installed = { "codelldb" },
-      handlers = {}
+      handlers = {},
     },
   },
   {
@@ -50,7 +97,7 @@ return {
         desc = "toggle the ui",
       },
     },
-    config = function ()
+    config = function()
       require("dapui").setup({
         mappings = {
           -- Use a table to apply multiple mappings
@@ -96,6 +143,6 @@ return {
           },
         },
       })
-    end
+    end,
   },
 }

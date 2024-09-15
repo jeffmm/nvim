@@ -1,12 +1,14 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
+    "folke/neodev.nvim",
     "b0o/schemastore.nvim",
     "williamboman/mason-lspconfig.nvim",
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
+    require("neodev").setup({})
     require("lsp_lines").setup()
     local lspconfig = require("lspconfig")
     local remaps = require("plugins.lsp.remaps")
@@ -78,6 +80,10 @@ return {
       dockerls = {},
       html = {},
       jsonls = {},
+      gdscript = {
+        name = "godot",
+        cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+      },
       lua_ls = require("plugins.lsp.servers.luals")(on_attach),
       intelephense = require("plugins.lsp.servers.phpls")(on_attach),
       pyright = {},
@@ -85,7 +91,7 @@ return {
       tailwindcss = {},
       terraformls = {},
       tflint = {},
-      tsserver = require("plugins.lsp.servers.tsserver")(on_attach),
+      ts_ls = {},
       yamlls = {},
     }
 
@@ -100,7 +106,9 @@ return {
 
     local server_names = {}
     for server_name, _ in pairs(servers) do
-      table.insert(server_names, server_name)
+      if server_name ~= "gdscript" then
+        table.insert(server_names, server_name)
+      end
     end
 
     local present_mason, mason = pcall(require, "mason-lspconfig")
