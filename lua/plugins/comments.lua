@@ -13,4 +13,8 @@ return {
       },
     })
   end,
+  -- keys = {
+  -- { "n", "gcl", ":CommentToggle<CR>" },
+  -- { "v", "gcl", ":CommentToggle<CR>" },
+  -- },
 }

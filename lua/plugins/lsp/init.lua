@@ -91,7 +91,7 @@ return {
       tailwindcss = {},
       terraformls = {},
       tflint = {},
-      ts_ls = {},
+      ts_ls = require("plugins.lsp.servers.tsserver")(on_attach),
       yamlls = {},
     }
 

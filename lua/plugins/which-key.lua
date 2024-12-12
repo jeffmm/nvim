@@ -1,6 +1,11 @@
 return {
   "folke/which-key.nvim",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  keys = {
+    {
+      "<leader>",
+    },
+  },
   opts = {
     plugins = {
       spelling = {
@@ -13,6 +18,15 @@ return {
       -- position = "bottom",
       -- margin = { 0, 1, 1, 5 },
       padding = { 1, 2, 1, 2 },
+    },
+    triggers_nowait = {
+      "`",
+      "'",
+      "g`",
+      "g'",
+      '"',
+      "<c-r>",
+      "z=",
     },
     spec = {
       { "<leader>'", group = "marks" },
@@ -31,15 +45,6 @@ return {
       { "<leader>r", group = "refactor" },
       { "<leader>s", group = "search" },
       { "<leader>t", group = "test" },
-    },
-  },
-  keys = {
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps (which-key)",
     },
   },
 }
