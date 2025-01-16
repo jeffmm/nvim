@@ -1,55 +1,54 @@
 -- return {
--- 	-- add catppuccin
--- 	{
--- 		"catppuccin/nvim",
--- 		name = "catppuccin",
--- 		opts = {
--- 			integrations = {
--- 				aerial = true,
--- 				alpha = true,
--- 				cmp = true,
--- 				dashboard = true,
--- 				flash = true,
--- 				gitsigns = true,
--- 				headlines = true,
--- 				illuminate = true,
--- 				indent_blankline = { enabled = true },
--- 				leap = true,
--- 				lsp_trouble = true,
--- 				mason = true,
--- 				markdown = true,
--- 				mini = true,
--- 				native_lsp = {
--- 					enabled = true,
--- 					underlines = {
--- 						errors = { "undercurl" },
--- 						hints = { "undercurl" },
--- 						warnings = { "undercurl" },
--- 						information = { "undercurl" },
--- 					},
--- 				},
--- 				navic = { enabled = true, custom_bg = "lualine" },
--- 				neotest = true,
--- 				neotree = true,
--- 				noice = true,
--- 				notify = true,
--- 				semantic_tokens = true,
--- 				telescope = true,
--- 				toggleterm = true,
--- 				treesitter = true,
--- 				treesitter_context = true,
--- 				which_key = true,
--- 			},
--- 		},
--- 		lazy = false,
--- 		priority = 1,
--- 		config = function()
--- 			vim.cmd("colorscheme catppuccin-latte")
--- 		end,
--- 	},
+--   -- add catppuccin
+--   {
+--     "catppuccin/nvim",
+--     name = "catppuccin",
+--     opts = {
+--       integrations = {
+--         aerial = true,
+--         alpha = true,
+--         cmp = true,
+--         dashboard = true,
+--         flash = true,
+--         gitsigns = true,
+--         headlines = true,
+--         illuminate = true,
+--         indent_blankline = { enabled = true },
+--         leap = true,
+--         lsp_trouble = true,
+--         mason = true,
+--         markdown = true,
+--         mini = true,
+--         native_lsp = {
+--           enabled = true,
+--           underlines = {
+--             errors = { "undercurl" },
+--             hints = { "undercurl" },
+--             warnings = { "undercurl" },
+--             information = { "undercurl" },
+--           },
+--         },
+--         navic = { enabled = true, custom_bg = "lualine" },
+--         neotest = true,
+--         neotree = true,
+--         noice = true,
+--         notify = true,
+--         semantic_tokens = true,
+--         telescope = true,
+--         toggleterm = true,
+--         treesitter = true,
+--         treesitter_context = true,
+--         which_key = true,
+--       },
+--     },
+--     lazy = false,
+--     priority = 1,
+--     config = function()
+--       vim.cmd("colorscheme catppuccin-latte")
+--     end,
+--   },
 -- }
 --
-
 -- https://github.com/folke/tokyonight.nvimdev
 
 return {
@@ -72,6 +71,22 @@ return {
         sidebars = "normal", -- style for sidebars, see below
         floats = "normal", -- style for floating windows
       },
+      on_highlights = function(highlights, colors)
+        highlights.Search = {
+          bg = "#7890dd",
+          fg = "#ffffff",
+        }
+        highlights.Substitute = {
+          bg = "#d20065",
+          bold = true,
+          fg = "#ffffff",
+        }
+        highlights.IncSearch = {
+          bg = "#964d00",
+          fg = "#ffffff",
+        }
+        highlights.FlashLabel = highlights.Substitute
+      end,
       sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
       day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
       hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.

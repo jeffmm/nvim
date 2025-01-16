@@ -17,7 +17,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.alpha" },
     -- disable auto-pairs
     { "echasnovski/mini.pairs", enabled = false },
-    { "echasnovski/mini.diff", version = false },
+    -- { "echasnovski/mini.diff", version = false },
     -- load custom plugins
     { import = "plugins" },
   },
@@ -53,7 +53,7 @@ require("lazy").setup({
       },
     },
   },
-  install = { colorscheme = { "catppuccin-latte" } },
+  install = { colorscheme = { "tokyonight-day" } },
   checker = { enabled = false }, -- don't automatically check for plugin updates
   performance = {
     cache = {
