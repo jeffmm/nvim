@@ -54,7 +54,7 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = true,
+    lazy = false,
     opts = {
       style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
       light_style = "day", -- The theme is used when the background is set to light
@@ -74,7 +74,7 @@ return {
       on_highlights = function(highlights, colors)
         highlights.Search = {
           bg = "#7890dd",
-          fg = "#ffffff",
+          fg = "#e1e2e7",
         }
         highlights.Substitute = {
           bg = "#d20065",
@@ -82,8 +82,8 @@ return {
           fg = "#ffffff",
         }
         highlights.IncSearch = {
-          bg = "#964d00",
-          fg = "#ffffff",
+          bg = "#b15c00",
+          fg = "#e1e2e7",
         }
         highlights.FlashLabel = highlights.Substitute
       end,

@@ -8,8 +8,8 @@ return {
 
       leap.add_default_mappings()
 
-      opts.highlight_unlabeled_phase_one_targets = true
-      opts.max_highlighted_traversal_targets = 5
+      opts.highlight_unlabeled_phase_one_targets = false
+      opts.max_highlighted_traversal_targets = 10
       opts.case_sensitive = true
       opts.substitute_chars = {}
       opts.safe_labels = {}
