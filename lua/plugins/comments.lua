@@ -1,17 +1,17 @@
 return {
-  "terrortylor/nvim-comment",
-  event = "BufReadPost",
+  'terrortylor/nvim-comment',
+  event = 'BufReadPost',
   config = function()
-    require("nvim_comment").setup()
-    require("which-key").add({
+    require('nvim_comment').setup()
+    require('which-key').add {
       g = {
-        name = "go",
+        name = 'go',
         c = {
-          name = "comment",
-          c = "line",
+          name = 'comment',
+          c = 'line',
         },
       },
-    })
+    }
   end,
   -- keys = {
   -- { "n", "gcl", ":CommentToggle<CR>" },
