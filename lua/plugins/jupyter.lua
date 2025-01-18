@@ -1,6 +1,7 @@
 return {
   {
     "GCBallesteros/NotebookNavigator.nvim",
+    enabled = false,
     dependencies = {
       "echasnovski/mini.comment",
       -- "hkupty/iron.nvim", -- repl provider
@@ -19,7 +20,7 @@ return {
   {
     "benlubas/molten-nvim",
     version = "1.7.0",
-    enabled = true,
+    enabled = false,
     dependencies = "jeffmm/image.nvim",
     build = ":UpdateRemotePlugins",
     ft = { "python", "julia" },
@@ -34,36 +35,36 @@ return {
       vim.g.molten_virt_text_output = true
     end,
   },
-  {
-    "echasnovski/mini.hipatterns",
-    event = "VeryLazy",
-    dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
-    opts = function()
-      local nn = require("notebook-navigator")
+  -- {
+  --   "echasnovski/mini.hipatterns",
+  --   event = "VeryLazy",
+  --   dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
+  --   opts = function()
+  --     local nn = require("notebook-navigator")
+  --
+  --     local opts = { highlighters = { cells = nn.minihipatterns_spec } }
+  --     return opts
+  --   end,
+  -- },
+  --
+  -- {
+  --   "echasnovski/mini.ai",
+  --   event = "VeryLazy",
+  --   dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
+  --   opts = function()
+  --     local nn = require("notebook-navigator")
+  --
+  --     local opts = { custom_textobjects = { h = nn.miniai_spec } }
+  --     return opts
+  --   end,
+  -- },
 
-      local opts = { highlighters = { cells = nn.minihipatterns_spec } }
-      return opts
-    end,
-  },
-
-  {
-    "echasnovski/mini.ai",
-    event = "VeryLazy",
-    dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
-    opts = function()
-      local nn = require("notebook-navigator")
-
-      local opts = { custom_textobjects = { h = nn.miniai_spec } }
-      return opts
-    end,
-  },
-
-  {
-    "jeffmm/jupytext.nvim",
-    -- Depending on your nvim distro or config you may need to make the loading not lazy
-    -- lazy=false,
-    opts = {
-      jupytext_path = vim.fn.fnamemodify(vim.g.python3_host_prog, ":p:h") .. "/jupytext",
-    },
-  },
+  -- {
+  --   "jeffmm/jupytext.nvim",
+  --   -- Depending on your nvim distro or config you may need to make the loading not lazy
+  --   -- lazy=false,
+  --   opts = {
+  --     jupytext_path = vim.fn.fnamemodify(vim.g.python3_host_prog, ":p:h") .. "/jupytext",
+  --   },
+  -- },
 }
