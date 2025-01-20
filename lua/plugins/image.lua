@@ -3,6 +3,7 @@ return {
   enabled = true,
   opts = {
     backend = "kitty",
+    rocks = { hererocks = true },
     integrations = {
       markdown = {
         enabled = true,
