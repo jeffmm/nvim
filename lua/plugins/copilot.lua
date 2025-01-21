@@ -1,3 +1,11 @@
+local diff_config = {
+  enabled = true,
+  close_chat_at = 50, -- Close an open chat buffer if the total columns of your display are less than...
+  layout = "vertical", -- vertical|horizontal split for default provider
+  opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
+  provider = "mini_diff", -- default|mini_diff
+}
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -28,13 +36,49 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    keys = {
+      {
+        "<leader>ca",
+        function()
+          vim.cmd("CodeCompanionActions")
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>cc",
+        function()
+          vim.cmd("CodeCompanionChat")
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "ga",
+        function()
+          vim.cmd("CodeCompanionChat Add")
+        end,
+        mode = { "v" },
+      },
+    },
     config = {
       strategies = {
         chat = {
           adapter = "anthropic",
+          diff = diff_config,
         },
         inline = {
           adapter = "anthropic",
+          layout = "vertical", -- vertical|horizontal|buffer
+          keymaps = {
+            accept_change = {
+              modes = { n = "ga" },
+              description = "Accept the suggested change",
+            },
+            reject_change = {
+              modes = { n = "gr" },
+              description = "Reject the suggested change",
+            },
+          },
+          diff = diff_config,
         },
       },
     },

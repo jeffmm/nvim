@@ -1,7 +1,12 @@
 return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = { "rafamadriz/friendly-snippets", "giuxtaposition/blink-cmp-copilot" },
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "giuxtaposition/blink-cmp-copilot",
+    "MeanderingProgrammer/render-markdown.nvim",
+    "olimorris/codecompanion.nvim",
+  },
 
   -- use a release tag to download pre-built binaries
   version = "*",
@@ -33,7 +38,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "lsp", "copilot", "path", "snippets", "buffer" },
+      default = { "lsp", "copilot", "path", "snippets", "markdown", "buffer" },
       providers = {
         copilot = {
           name = "copilot",
@@ -41,6 +46,11 @@ return {
           kind = "Copilot",
           score_offset = 100,
           async = true,
+        },
+        markdown = {
+          name = "RenderMarkdown",
+          module = "render-markdown.integ.blink",
+          fallbacks = { "lsp" },
         },
       },
       per_filetype = {
