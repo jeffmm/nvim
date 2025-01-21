@@ -38,14 +38,14 @@ return {
     },
     keys = {
       {
-        "<leader>ca",
+        "<leader>aa",
         function()
           vim.cmd("CodeCompanionActions")
         end,
         mode = { "n", "v" },
       },
       {
-        "<leader>cc",
+        "<leader>ac",
         function()
           vim.cmd("CodeCompanionChat")
         end,

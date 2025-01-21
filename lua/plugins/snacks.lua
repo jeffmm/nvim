@@ -8,7 +8,14 @@ return {
     dashboard = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = false,
+      layout = {
+        preset = function()
+          return vim.o.columns >= 120 and "telescope" or "vertical"
+        end,
+      },
+    },
     notifier = {
       enabled = true,
       timeout = 3000,
