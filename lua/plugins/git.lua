@@ -1,6 +1,13 @@
 return {
-  "echasnovski/mini.diff",
-  version = false,
+  { "echasnovski/mini.diff", version = false },
+  {
+    "echasnovski/mini.misc",
+    config = function()
+      local MiniMisc = require("mini.misc")
+      MiniMisc.make_global = { "put", "put_text" }
+      MiniMisc.setup_auto_root()
+    end,
+  },
 }
 -- 	"sindrets/diffview.nvim", -- optional - Diff integration
 -- 	config = function()

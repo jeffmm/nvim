@@ -17,10 +17,10 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("n", "    new file", ":ene<CR>"),
-      dashboard.button("o", "    old files", ":Telescope oldfiles<CR>"),
-      dashboard.button("f", "󰥨    find file", ":Telescope find_files<CR>"),
-      dashboard.button("t", "󰱼    find text", ":Telescope live_grep_args<CR>"),
-      dashboard.button("p", "󰥨    find projects", ":lua require'telescope'.extensions.project.project{}<CR>"),
+      dashboard.button("o", "    old files", ":lua require('snacks').picker.recent()<CR>"),
+      dashboard.button("f", "󰥨    find file", ":lua require('snacks').picker.files()<CR>"),
+      dashboard.button("t", "󰱼    find text", ":lua require('snacks').picker.grep()<CR>"),
+      dashboard.button("p", "󰥨    find projects", ":lua require('snacks').picker.projects()<CR>"),
       -- dashboard.button("h", "    browse git", ":Flog<CR>"),
       -- dashboard.button("g", "    browse git", ":lua require('lazy.util').float_term({ 'lazygit' })<CR>"),
       dashboard.button("l", "󰒲    lazy", ":Lazy<CR>"),
@@ -29,7 +29,7 @@ return {
       dashboard.button(
         ".",
         "    config",
-        ":lua require('telescope.builtin').find_files({cwd = vim.fn.stdpath('config')})<CR>"
+        ":lua require('snacks').picker.files({cwd = vim.fn.stdpath('config')})<CR>"
       ),
 
       dashboard.button("q", "󰭿    quit", ":qa<CR>"),

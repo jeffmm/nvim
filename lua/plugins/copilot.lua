@@ -22,4 +22,21 @@ return {
     },
   },
   { "giuxtaposition/blink-cmp-copilot" },
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = {
+      strategies = {
+        chat = {
+          adapter = "anthropic",
+        },
+        inline = {
+          adapter = "anthropic",
+        },
+      },
+    },
+  },
 }
