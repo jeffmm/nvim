@@ -73,7 +73,8 @@
 -- map("v", ">", ">gv")
 
 -- lazy
--- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- map("n", "<leader>l", "<cmd>lazy<cr>", { desc = "lazy" })
+-- unmap("n", "<leader>l") -- "<cmd>lazy<cr>", { desc = "lazy" })
 
 -- new file
 -- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -276,7 +277,9 @@ unmap({ "i", "x", "n", "s" }, "<C-s>") -- , "<cmd>w<cr><esc>", { desc = "Save Fi
 -- unmap("n", "gcO") -- , "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- lazy
--- unmap("n", "<leader>l") -- , "<cmd>Lazy<cr>", { desc = "Lazy" })
+unmap("n", "<leader>l")  -- "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
 
 -- new file
 -- unmap("n", "<leader>fn") -- , "<cmd>enew<cr>", { desc = "New File" })
