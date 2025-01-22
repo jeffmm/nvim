@@ -273,8 +273,10 @@ unmap({ "i", "x", "n", "s" }, "<C-s>") -- , "<cmd>w<cr><esc>", { desc = "Save Fi
 -- unmap("v", ">") -- , ">gv")
 
 -- commenting
--- unmap("n", "gco") -- , "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
--- unmap("n", "gcO") -- , "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+unmap({"n", "x", "o"}, "gc") -- , "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+unmap("n", "gcc") -- , "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+unmap("n", "gco") -- , "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+unmap("n", "gcO") -- , "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- lazy
 unmap("n", "<leader>l")  -- "<cmd>Lazy<cr>", { desc = "Lazy" })

@@ -98,22 +98,22 @@ return {
       },
     })
     -- vim.keymap.set("n", "<leader>u", ":Telescope undo<cr>", "undo tree")
-    vim.keymap.set("n", "\\", function()
-      telescope.extensions.live_grep_args.live_grep_args({
-        prompt_title = "grep",
-        additional_args = "-i",
-      })
-    end, { desc = "live grep" })
-    vim.keymap.set("n", "<leader>o", ":Telescope oldfiles<cr>", { desc = "old files" })
-    vim.keymap.set(
-      "n",
-      "<leader>fp",
-      ":lua require'telescope'.extensions.project.project{}<CR>",
-      { desc = "find projects" }
-    )
-    vim.keymap.set("n", "<leader>gc", function()
-      lga_shortcuts.grep_word_under_cursor({ postfix = " --hidden " })
-    end, { desc = "grep under cursor" })
+    -- vim.keymap.set("n", "\\", function()
+    --   telescope.extensions.live_grep_args.live_grep_args({
+    --     prompt_title = "grep",
+    --     additional_args = "-i",
+    --   })
+    -- end, { desc = "live grep" })
+    -- vim.keymap.set("n", "<leader>o", ":Telescope oldfiles<cr>", { desc = "old files" })
+    -- vim.keymap.set(
+    --   "n",
+    --   "<leader>fp",
+    --   ":lua require'telescope'.extensions.project.project{}<CR>",
+    --   { desc = "find projects" }
+    -- )
+    -- vim.keymap.set("n", "<leader>gc", function()
+    --   lga_shortcuts.grep_word_under_cursor({ postfix = " --hidden " })
+    -- end, { desc = "grep under cursor" })
     vim.keymap.set("n", "<leader>p", ":Telescope find_files<cr>", { desc = "find files" })
     -- vim.keymap.set("n", "<leader>f", function()
     -- 	telescope.extensions.file_browser.file_browser()
@@ -123,11 +123,11 @@ return {
     -- 		path = vim.fn.stdpath("config"),
     -- 	})
     -- end, {desc="nvim dotfiles"})
-    vim.keymap.set("n", "<leader>.", function()
-      builtin.find_files({
-        cwd = vim.fn.stdpath("config"),
-      })
-    end, { desc = "nvim dotfiles" })
+    -- vim.keymap.set("n", "<leader>.", function()
+    --   builtin.find_files({
+    --     cwd = vim.fn.stdpath("config"),
+    --   })
+    -- end, { desc = "nvim dotfiles" })
     -- telescope.load_extension("undo")
     telescope.load_extension("file_browser")
     telescope.load_extension("live_grep_args")

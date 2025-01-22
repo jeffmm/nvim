@@ -15,6 +15,18 @@ return {
           return vim.o.columns >= 120 and "telescope" or "vertical"
         end,
       },
+      win = {
+        -- input window
+        input = {
+          keys = {
+            -- ["<Esc>"] = "close",
+            -- ["<C-c>"] = { "close", mode = "i" },
+            -- to close the picker on ESC instead of going to normal mode,
+            -- add the following keymap to your config
+            ["<Esc>"] = { "close", mode = { "n", "i" } },
+          },
+        },
+      },
     },
     notifier = {
       enabled = true,
