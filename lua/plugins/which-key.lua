@@ -19,15 +19,6 @@ return {
       -- margin = { 0, 1, 1, 5 },
       padding = { 1, 2, 1, 2 },
     },
-    triggers_nowait = {
-      "`",
-      "'",
-      "g`",
-      "g'",
-      '"',
-      "<c-r>",
-      "z=",
-    },
     spec = {
       { "<leader>'", group = "marks" },
       { "<leader>/", group = "search" },

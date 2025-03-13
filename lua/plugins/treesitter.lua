@@ -118,10 +118,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>dp", function()
-      vim.treesitter.inspect_tree({ command = "botright 60vnew" })
-    end, { desc = "treesitter playground" })
-
     vim.keymap.set("n", "<C-e>", function()
       local result = vim.treesitter.get_captures_at_cursor(0)
       print(vim.inspect(result))

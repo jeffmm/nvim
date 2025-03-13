@@ -9,7 +9,7 @@ return {
     indent = { enabled = true },
     input = { enabled = true },
     picker = {
-      enabled = false,
+      enabled = true,
       layout = {
         preset = function()
           return vim.o.columns >= 120 and "telescope" or "vertical"

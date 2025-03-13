@@ -367,7 +367,6 @@ unmap("n", "<leader>L") -- , function() LazyVim.news.changelog() end, { desc = "
 -- unmap("t", "<c-_>") -- , "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- windows
-unmap("n", "<leader>w")  -- , "<c-w>", { desc = "Windows", remap = true })
 unmap("n", "<leader>-")  -- , "<C-W>s", { desc = "Split Window Below", remap = true })
 unmap("n", "<leader>|")  -- , "<C-W>v", { desc = "Split Window Right", remap = true })
 unmap("n", "<leader>wd") -- , "<C-W>c", { desc = "Delete Window", remap = true })

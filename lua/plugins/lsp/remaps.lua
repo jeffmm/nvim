@@ -51,10 +51,6 @@ function X.set_default_on_buffer(client, bufnr)
   end
 
   if cap.referencesProvider then
-    buf_set_keymap("n", "gr", function()
-      require("telescope.builtin").lsp_references()
-      -- require("fzf-lua").lsp_references()
-    end, "search references", { silent = true })
     buf_set_keymap("n", "<leader>lr", function()
       require("telescope.builtin").lsp_references()
       -- require("fzf-lua").lsp_references()
