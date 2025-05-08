@@ -7,3 +7,4 @@ pnglatex
 pyperclip
 jupytext
 pytest
+ipython
