@@ -88,11 +88,11 @@ function X.set_default_on_buffer(client, bufnr)
   -- 	buf_set_keymap("n", "<leader>rr", ":IncRename ", "rename")
   -- end
   --
-  if cap.documentSymbolProvider then
-    buf_set_keymap("n", "<leader>lo", function()
-      require("fzf-lua").lsp_document_symbols()
-    end, "document symbols")
-  end
+  -- if cap.documentSymbolProvider then
+  --   buf_set_keymap("n", "<leader>lo", function()
+  --     require("fzf-lua").lsp_document_symbols()
+  --   end, "document symbols")
+  -- end
 
   local ft = vim.bo[bufnr].filetype
   if ft == "sh" or ft == "lua" then
