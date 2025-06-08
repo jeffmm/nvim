@@ -114,7 +114,7 @@ return {
     -- vim.keymap.set("n", "<leader>gc", function()
     --   lga_shortcuts.grep_word_under_cursor({ postfix = " --hidden " })
     -- end, { desc = "grep under cursor" })
-    vim.keymap.set("n", "<leader>p", ":Telescope find_files<cr>", { desc = "find files" })
+    -- vim.keymap.set("n", "<leader>p", ":Telescope find_files<cr>", { desc = "find files" })
     -- vim.keymap.set("n", "<leader>f", function()
     -- 	telescope.extensions.file_browser.file_browser()
     -- end, {desc="browse files"})

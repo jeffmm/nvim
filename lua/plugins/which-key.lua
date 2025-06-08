@@ -12,6 +12,9 @@ return {
         enabled = true,
         suggestions = 20,
       },
+      presets = {
+        windows = false,
+      },
     },
     win = {
       border = "shadow",
@@ -20,22 +23,7 @@ return {
       padding = { 1, 2, 1, 2 },
     },
     spec = {
-      { "<leader>'", group = "marks" },
-      { "<leader>/", group = "search" },
-      { "<leader>/g", group = "git" },
-      { "<leader>/gd", group = "diff" },
-      { "<leader>;", group = "test" },
-      { "<leader><tab>", group = "tabs" },
-      { "<leader>[", group = "previous" },
-      { "<leader>]", group = "next" },
-      { "<leader>b", group = "buffer" },
-      { "<leader>d", group = "debug" },
-      { "<leader>l", group = "lsp" },
-      { "<leader>m", group = "macro/markdown" },
-      { "<leader>n", group = "notifications" },
-      { "<leader>r", group = "refactor" },
-      { "<leader>s", group = "search" },
-      { "<leader>t", group = "test" },
+      { "<leader>p", group = "Pomodoro" },
     },
   },
 }

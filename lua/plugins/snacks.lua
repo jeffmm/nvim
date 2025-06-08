@@ -8,6 +8,7 @@ return {
     dashboard = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
+    projects = { enabled = true },
     picker = {
       enabled = true,
       layout = {
@@ -90,7 +91,7 @@ return {
     {
       "<leader>fp",
       function()
-        require("snacks").picker.recent_projects()
+        require("snacks").picker.projects()
       end,
       desc = "Find Projects",
     },
