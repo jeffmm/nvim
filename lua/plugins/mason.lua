@@ -1,18 +1,16 @@
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   build = ":MasonInstallAll",
-  config = function()
-    require("mason").setup({
-      ui = {
-        border = "shadow",
-        icons = {
-          package_installed = "󱄲",
-          package_pending = "󱄰",
-          package_uninstalled = "󱄯",
-        },
-        zindex = 99,
+  opts = function()
+    local ui = {
+      border = "shadow",
+      icons = {
+        package_installed = "󱄲",
+        package_pending = "󱄰",
+        package_uninstalled = "󱄯",
       },
-    })
+      zindex = 99,
+    }
     vim.api.nvim_create_user_command("MasonInstallAll", function()
       vim.cmd("MasonUpdate")
       local ensure_installed = {
@@ -43,6 +41,7 @@ return {
         "yaml-language-server",
       }
       vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
-    end, { desc = "install all lsp tools" })
+    end, { desc = "Install all LSP tools" })
+    return ui
   end,
 }

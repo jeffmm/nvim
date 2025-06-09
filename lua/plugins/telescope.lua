@@ -1,135 +1,160 @@
+-- NOTE: Plugins can specify dependencies.
+--
+-- The dependencies are proper plugin specifications as well - anything
+-- you do for a plugin at the top level, you can do for a dependency.
+--
+-- Use the `dependencies` key to specify the dependencies of a particular plugin
+
 return {
-  "nvim-telescope/telescope.nvim",
-  enabled = true,
-  event = "VeryLazy",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    -- "nvim-lua/popup.nvim",
-    -- "debugloop/telescope-undo.nvim",
-    "nvim-telescope/telescope-file-browser.nvim",
-    "nvim-telescope/telescope-live-grep-args.nvim",
-    "nvim-telescope/telescope-project.nvim",
-    -- "nvim-telescope/telescope-media-files.nvim",
-  },
-  config = function()
-    local telescope = require("telescope")
-    local builtin = require("telescope.builtin")
-    local tele_actions = require("telescope.actions")
-    local lga_actions = require("telescope-live-grep-args.actions")
-    local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
-    local project_actions = require("telescope._extensions.project.actions")
-    -- local undo_actions = require("telescope-undo.actions")
-    telescope.setup({
-      defaults = {
-        layout_config = {
-          anchor = "center",
-          height = 0.8,
-          width = 0.9,
-          -- preview_width = 0.6,
-          prompt_position = "bottom",
-        },
-        borderchars = {
-          prompt = { "┄", "┊", "┄", "┊", "╭", "╮", "╯", "╰" },
-          results = { "┄", " ", "┄", "┊", "╭", "┄", "┄", "╰" },
-          preview = { "┄", "┊", "┄", "┊", "┄", "╮", "╯", "╰" },
-        },
-        mappings = {
-          i = {
-            ["<esc>"] = tele_actions.close,
-          },
-        },
+  { -- Fuzzy Finder (files, lsp, etc)
+    "nvim-telescope/telescope.nvim",
+    event = "VimEnter",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+        "nvim-telescope/telescope-fzf-native.nvim",
+
+        -- `build` is used to run some command when the plugin is installed/updated.
+        -- This is only run then, not every time Neovim starts up.
+        build = "make",
+
+        -- `cond` is a condition used to determine whether this plugin should be
+        -- installed and loaded.
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
       },
-      extensions = {
-        project = {
-          base_dirs = {
-            { path = "~/Projects", depth = 1 },
+      "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+
+      -- Useful for getting pretty icons, but requires a Nerd Font.
+      { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+    },
+    config = function()
+      -- Telescope is a fuzzy finder that comes with a lot of different things that
+      -- it can fuzzy find! It's more than just a "file finder", it can search
+      -- many different aspects of Neovim, your workspace, LSP, and more!
+      --
+      -- The easiest way to use Telescope, is to start by doing something like:
+      --  :Telescope help_tags
+      --
+      -- After running this command, a window will open up and you're able to
+      -- type in the prompt window. You'll see a list of `help_tags` options and
+      -- a corresponding preview of the help.
+      --
+      -- Two important keymaps to use while in Telescope are:
+      --  - Insert mode: <c-/>
+      --  - Normal mode: ?
+      --
+      -- This opens a window that shows you all of the keymaps for the current
+      -- Telescope picker. This is really useful to discover what Telescope can
+      -- do as well as how to actually do it!
+
+      local tele_actions = require("telescope.actions")
+      local lga_actions = require("telescope-live-grep-args.actions")
+
+      -- [[ Configure Telescope ]]
+      -- See `:help telescope` and `:help telescope.setup()`
+      require("telescope").setup({
+
+        -- You can put your default mappings / updates / etc. in here
+        --  All the info you're looking for is in `:help telescope.setup()`
+        --
+        -- defaults = {
+        --   mappings = {
+        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+        --   },
+        -- },
+        -- pickers = {}
+        defaults = {
+          layout_config = {
+            anchor = "center",
+            height = 0.8,
+            width = 0.9,
+            -- preview_width = 0.6,
+            prompt_position = "bottom",
           },
-          hidden_files = false, -- default: false
-          theme = "dropdown",
-          order_by = "asc",
-          search_by = "title",
-          sync_with_nvim_tree = true, -- default false
-          -- on_project_selected = function(prompt_bufnr)
-          -- 	-- Do anything you want in here. For example (the default):
-          -- 	project_actions.find_project_files(prompt_bufnr, true)
-          -- end
-        },
-        -- media_files = {
-        -- 	-- filetypes whitelist
-        -- 	-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-        -- 	filetypes = { "png", "webp", "jpg", "jpeg" },
-        -- 	-- find command (defaults to `fd`)
-        -- 	find_cmd = "rg",
-        -- },
-        -- undo = {
-        -- 	use_delta = true,
-        -- 	side_by_side = true,
-        -- 	entry_format = "󰣜  #$ID, $STAT, $TIME",
-        -- 	layout_strategy = "flex",
-        -- 	mappings = {
-        -- 		i = {
-        -- 			["<cr>"] = undo_actions.yank_additions,
-        -- 			["§"] = undo_actions.yank_deletions, -- term mapped to shift+enter
-        -- 			["<c-\\>"] = undo_actions.restore,
-        -- 		},
-        -- 	},
-        -- },
-        live_grep_args = {
-          auto_quoting = true,
+          borderchars = {
+            prompt = { "┄", "┊", "┄", "┊", "╭", "╮", "╯", "╰" },
+            results = { "┄", " ", "┄", "┊", "╭", "┄", "┄", "╰" },
+            preview = { "┄", "┊", "┄", "┊", "┄", "╮", "╯", "╰" },
+          },
           mappings = {
             i = {
-              ["<c-\\>"] = lga_actions.quote_prompt({ postfix = " --hidden " }),
+              ["<esc>"] = tele_actions.close,
             },
           },
         },
-        file_browser = {
-          depth = 1,
-          auto_depth = false,
-          hidden = { file_browser = true, folder_browser = true },
-          hide_parent_dir = false,
-          collapse_dirs = false,
-          prompt_path = false,
-          quiet = false,
-          dir_icon = "󰉓 ",
-          dir_icon_hl = "Default",
-          display_stat = { date = true, size = true, mode = true },
-          git_status = true,
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+              i = {
+                ["<c-\\>"] = lga_actions.quote_prompt({ postfix = " --hidden " }),
+              },
+            },
+          },
+          file_browser = {
+            depth = 1,
+            auto_depth = false,
+            hidden = { file_browser = true, folder_browser = true },
+            hide_parent_dir = false,
+            collapse_dirs = false,
+            prompt_path = false,
+            quiet = false,
+            dir_icon = "󰉓 ",
+            dir_icon_hl = "Default",
+            display_stat = { date = true, size = true, mode = true },
+            git_status = true,
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown(),
+          },
         },
-      },
-    })
-    -- vim.keymap.set("n", "<leader>u", ":Telescope undo<cr>", "undo tree")
-    -- vim.keymap.set("n", "\\", function()
-    --   telescope.extensions.live_grep_args.live_grep_args({
-    --     prompt_title = "grep",
-    --     additional_args = "-i",
-    --   })
-    -- end, { desc = "live grep" })
-    -- vim.keymap.set("n", "<leader>o", ":Telescope oldfiles<cr>", { desc = "old files" })
-    -- vim.keymap.set(
-    --   "n",
-    --   "<leader>fp",
-    --   ":lua require'telescope'.extensions.project.project{}<CR>",
-    --   { desc = "find projects" }
-    -- )
-    -- vim.keymap.set("n", "<leader>gc", function()
-    --   lga_shortcuts.grep_word_under_cursor({ postfix = " --hidden " })
-    -- end, { desc = "grep under cursor" })
-    -- vim.keymap.set("n", "<leader>p", ":Telescope find_files<cr>", { desc = "find files" })
-    -- vim.keymap.set("n", "<leader>f", function()
-    -- 	telescope.extensions.file_browser.file_browser()
-    -- end, {desc="browse files"})
-    -- vim.keymap.set("n", "<leader>.", function()
-    -- 	telescope.extensions.file_browser.file_browser({
-    -- 		path = vim.fn.stdpath("config"),
-    -- 	})
-    -- end, {desc="nvim dotfiles"})
-    -- vim.keymap.set("n", "<leader>.", function()
-    --   builtin.find_files({
-    --     cwd = vim.fn.stdpath("config"),
-    --   })
-    -- end, { desc = "nvim dotfiles" })
-    -- telescope.load_extension("undo")
-    telescope.load_extension("file_browser")
-    telescope.load_extension("live_grep_args")
-  end,
+      })
+
+      -- Enable Telescope extensions if they are installed
+      pcall(require("telescope").load_extension, "fzf")
+      pcall(require("telescope").load_extension, "ui-select")
+      pcall(require("telescope").load_extension, "file_browser")
+      pcall(require("telescope").load_extension, "live_grep_args")
+
+      -- See `:help telescope.builtin`
+      local builtin = require("telescope.builtin")
+      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+      vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+      vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+
+      -- Slightly advanced example of overriding default behavior and theme
+      vim.keymap.set("n", "<leader>/", function()
+        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+          winblend = 10,
+          previewer = false,
+        }))
+      end, { desc = "[/] Fuzzily search in current buffer" })
+
+      -- It's also possible to pass additional configuration options.
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set("n", "<leader>s/", function()
+        builtin.live_grep({
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        })
+      end, { desc = "[S]earch [/] in Open Files" })
+
+      -- Shortcut for searching your Neovim configuration files
+      vim.keymap.set("n", "<leader>sn", function()
+        builtin.find_files({ cwd = vim.fn.stdpath("config") })
+      end, { desc = "[S]earch [N]eovim files" })
+    end,
+  },
 }
+-- vim: ts=2 sts=2 sw=2 et

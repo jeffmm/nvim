@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "b0o/schemastore.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   },
   event = { "BufReadPre", "BufNewFile" },

@@ -52,7 +52,7 @@ return {
       desc = "Command History",
     },
     {
-      "<leader><space>",
+      "<leader><leader>",
       function()
         require("snacks").picker.files()
       end,
