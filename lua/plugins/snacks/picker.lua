@@ -72,14 +72,6 @@ return {
     },
 
     {
-      "<leader>fp",
-      function()
-        require("snacks").picker.projects()
-      end,
-      desc = "Find Projects",
-    },
-
-    {
       "<leader>fo",
       function()
         require("snacks").picker.recent()
@@ -231,11 +223,20 @@ return {
       desc = "Colorschemes",
     },
     {
-      "<leader>qp",
+      "<leader>fp",
       function()
-        require("snacks").picker.projects()
+        require("snacks").picker.projects({
+          finder = "recent_projects",
+          format = "file",
+          dev = { "~/Projects" },
+          confirm = function(_, item)
+            require("snacks").picker.files({ cwd = item.file })
+          end,
+          patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "package.json", "Makefile" },
+          recent = true,
+        })
       end,
-      desc = "Projects",
+      desc = "Find Projects",
     },
     -- LSP
     {
