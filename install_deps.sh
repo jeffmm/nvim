@@ -20,9 +20,8 @@ source "$HOME/.zshrc"
 if command -v nvim >/dev/null 2>&1; then
   # Check neovim version >= 0.11.2
   echo "Checking neovim version..."
-  if nvim --version | grep -E "version 0\.11\.[2-9]" >/dev/null 2>&1 || nvim --version | grep -E "version 0\.1[2-9]\." >/dev/null 2>&1; then
+  if nvim --version | grep -E "v0\.11\.[2-9]" >/dev/null 2>&1 || nvim --version | grep -E "v0\.1[2-9]\." >/dev/null 2>&1; then
     echo "neovim is already installed and up to date."
-    exit 0
   else
     install_neovim
   fi
@@ -72,12 +71,14 @@ else
     source "$HOME/.zshrc"
   fi
 fi
+# Ensure uv is up to date
+uv tool install --upgrade uv --force
 if [ ! -d "$HOME/.config/nvim/.venv" ]; then
   echo "Creating virtual environment for neovim..."
   (
     cd "$HOME/.config/nvim" || exit 1
     uv python install python3.13
-    uv venv .
+    uv venv
     source .venv/bin/activate
     uv sync
   )
@@ -131,17 +132,17 @@ if command -v lua >/dev/null 2>&1; then
   echo "lua is already installed."
 else
   echo "Installing lua..."
-  curl -L -R -O https://www.lua.org/ftp/lua-5.4.8.tar.gz
-  tar zxf lua-5.4.8.tar.gz
+  curl -L -R -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+  tar zxf lua-5.1.5.tar.gz
   (
-    cd lua-5.4.8 || exit 1
-    make all test
+    cd lua-5.1.5 || exit 1
     mkdir -p "$HOME/.lua"
+    make macosx INSTALL_TOP="$HOME/.lua"
     make install INSTALL_TOP="$HOME/.lua"
   )
   echo "export PATH=\"\$HOME/.lua/bin:\$PATH\"" >>"$HOME/.zshrc"
   source "$HOME/.zshrc"
-  rm -rf lua-5.4.8 lua-5.4.8.tar.gz
+  rm -rf lua-5.1.5 lua-5.1.5.tar.gz
 fi
 if command -v luarocks >/dev/null 2>&1; then
   echo "luarocks is already installed."
@@ -152,7 +153,7 @@ else
   (
     mkdir -p "$HOME/.lua"
     cd luarocks-3.12.0 || exit 1
-    ./configure --prefix="$HOME/.lua" && make && make install
+    ./configure --lua-version=5.1 --prefix="$HOME/.lua" && make && make install
   )
   export PATH="$HOME/.lua/bin:$PATH"
   if ! grep -q "\$HOME/.lua/bin" "$HOME/.zshrc"; then
