@@ -60,6 +60,7 @@ else
     source "$HOME/.zshrc"
   fi
 fi
+rustup update stable
 # Ensure uv is installed
 if command -v uv >/dev/null 2>&1; then
   echo "uv is already installed."
