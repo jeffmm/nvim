@@ -1,0 +1,13 @@
+[project]
+name = "nvim"
+version = "0.1.0"
+description = "Python3 virtualenv configuration for neovim"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ipython>=9.3.0",
+    "pip>=25.1.1",
+    "pynvim>=0.5.2",
+    "pytest>=8.4.0",
+    "vectorcode>=0.6.12",
+]

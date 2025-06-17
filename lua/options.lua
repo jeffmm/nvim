@@ -3,7 +3,7 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 -- Neovim virtual env
-vim.g.python3_host_prog = vim.fn.expand("$HOME") .. "/.config/nvim/venv/neovim/bin/python3"
+vim.g.python3_host_prog = vim.fn.expand("$HOME") .. "/.config/nvim/.venv/bin/python"
 -- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
 -- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
 

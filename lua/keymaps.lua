@@ -88,6 +88,12 @@ vim.keymap.set("n", "<C-k>", "<C-u>", { desc = "scroll up" })
 vim.keymap.set("v", "<C-j>", "<C-d>", { desc = "scroll down" })
 vim.keymap.set("v", "<C-k>", "<C-u>", { desc = "scroll up" })
 
+-- Better up and down movement in wrapped lines
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- Lazy.nvim
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "[L]azy" })
 
