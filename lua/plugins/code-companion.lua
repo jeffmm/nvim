@@ -33,15 +33,23 @@ return {
           vim.cmd("CodeCompanionActions")
         end,
         mode = { "n", "v" },
-        desc = "Actions",
+        desc = "[A]ctions",
       },
       {
-        "<leader>ac",
+        "<leader>an",
         function()
           vim.cmd("CodeCompanionChat")
         end,
         mode = { "n" },
-        desc = "Chat",
+        desc = "[N]ew Chat",
+      },
+      {
+        "<leader>ac",
+        function()
+          vim.cmd("CodeCompanionChat Toggle")
+        end,
+        mode = { "n" },
+        desc = "[C]hat",
       },
       {
         "<leader>ac",
@@ -49,7 +57,7 @@ return {
           vim.cmd("CodeCompanionChat")
         end,
         mode = { "v" },
-        desc = "Add to Chat",
+        desc = "Add to [C]hat",
       },
     },
     opts = {
@@ -59,7 +67,7 @@ return {
           diff = diff_config,
         },
         inline = {
-          adapter = "anthropic",
+          adapter = "gemini",
           layout = "vertical", -- vertical|horizontal|buffer
           keymaps = {
             accept_change = {

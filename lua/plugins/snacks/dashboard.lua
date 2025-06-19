@@ -11,17 +11,7 @@ return {
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "o", desc = "Old Files (deprecated)", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = "󰥨 ", key = "p", desc = "Projects", action = [[:lua Snacks.dashboard.pick(
-              'projects',
-              {
-                dev = {'~/Projects'},
-                recent = true,
-                confirm = function(_, item)
-                  require('snacks').picker.files({ cwd = item.file })
-                end
-              }
-            )]]
-          },
+          { icon = "󰥨 ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects', {dev = {'~/Projects'}, recent = true, confirm = function(_, item) require('snacks').picker.files({ cwd = item.file }) end})" },
           { icon = "󰄉 ", key = "P", desc = "Profile", action = ":Lazy profile" },
           { icon = " ", key = "s", desc = "Search Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
