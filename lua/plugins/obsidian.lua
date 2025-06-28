@@ -267,7 +267,11 @@ return {
       -- Runs anytime you enter the buffer for a note.
       ---@param client obsidian.Client
       ---@param note obsidian.Note
-      enter_note = function(client, note) end,
+      enter_note = function(client, note)
+        local copilot = require("copilot.suggestion")
+        copilot.toggle_auto_trigger()
+        vim.b.completion = false
+      end,
 
       -- Runs anytime you leave the buffer for a note.
       ---@param client obsidian.Client

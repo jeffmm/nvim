@@ -45,7 +45,7 @@ return {
               prev = "<C-h>",
             },
           },
-          panel = { enabled = true },
+          panel = { enabled = false },
           filetypes = {
             markdown = true,
             help = true,
@@ -66,6 +66,25 @@ return {
 
     -- @module 'blink.cmp'
     -- @type blink.cmp.Config
+    keys = {
+      -- The keymap preset to use for blink.cmp.
+      -- See :h blink-cmp-config-keymap for more information
+      -- on the available presets and how to define your own.
+      {
+        "<leader>lc",
+        function()
+          if vim.b.completion == nil then
+            vim.b.completion = false
+          else
+            vim.b.completion = not vim.b.completion
+          end
+        end,
+        desc = "[C]ompletion Toggle (buffer)",
+      },
+      -- The default preset is recommended, as it provides a good balance
+      -- of usability and compatibility with other plugins.
+      --
+    },
     opts = {
       keymap = {
 
@@ -93,7 +112,7 @@ return {
         preset = "enter",
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
-
+        ["<C-e>"] = { "select_and_accept", "fallback" },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
@@ -110,6 +129,13 @@ return {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = true, auto_show_delay_ms = 2000 },
+        menu = {
+          auto_show = true,
+        },
+        ghost_text = {
+          enabled = false,
+          show_with_menu = false,
+        },
         list = {
           selection = {
             preselect = true,

@@ -21,12 +21,12 @@ return {
       {
         "ravitemer/mcphub.nvim",
         build = "npm install -g mcp-hub@latest",
-        opts = {},
+        opts = { native_servers = {} },
       },
       "ravitemer/codecompanion-history.nvim",
     },
     keys = {
-      { "<leader>a", mode = { "n", "v" }, desc = "CodeCompanion", group = "CodeCompanion" },
+      { "<leader>a", mode = { "n", "v" }, group = "CodeCompanion" },
       {
         "<leader>aa",
         function()
@@ -51,6 +51,23 @@ return {
         mode = { "n" },
         desc = "[C]hat",
       },
+      {
+        "<leader>am",
+        function()
+          vim.cmd("MCPHub")
+        end,
+        mode = { "n" },
+        desc = "[M]CP",
+      },
+      {
+        "<leader>ap",
+        function()
+          require("copilot.suggestion").toggle_auto_trigger()
+        end,
+        mode = { "n" },
+        desc = "Co[P]ilot",
+      },
+
       {
         "<leader>ac",
         function()
