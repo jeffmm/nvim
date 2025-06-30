@@ -9,6 +9,7 @@ local diff_config = {
 return {
   {
     "olimorris/codecompanion.nvim",
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",

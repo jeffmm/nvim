@@ -55,7 +55,10 @@ return {
       },
       "fang2hou/blink-copilot",
       "MeanderingProgrammer/render-markdown.nvim",
-      "olimorris/codecompanion.nvim",
+      -- {
+      -- "olimorris/codecompanion.nvim",
+      -- lazy = true,
+      -- },
     },
     -- use a release tag to download pre-built binaries
     version = "*",
@@ -161,9 +164,9 @@ return {
           },
           lazydev = { module = "lazydev.integrations.blink", score_offset = 50 },
         },
-        per_filetype = {
-          codecompanion = { "codecompanion" },
-        },
+        -- per_filetype = {
+        -- codecompanion = { "codecompanion" },
+        -- },
       },
       snippets = { preset = "luasnip" },
 
