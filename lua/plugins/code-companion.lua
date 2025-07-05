@@ -1,5 +1,6 @@
+local enable_plugin = false
 local diff_config = {
-  enabled = true,
+  enabled = enable_plugin,
   close_chat_at = 50, -- Close an open chat buffer if the total columns of your display are less than...
   layout = "vertical", -- vertical|horizontal split for default provider
   opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
@@ -10,6 +11,7 @@ return {
   {
     "olimorris/codecompanion.nvim",
     lazy = true,
+    enabled = enable_plugin,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -102,7 +104,7 @@ return {
       },
       extensions = {
         history = {
-          enabled = true,
+          enabled = enable_plugin,
           opts = {
             -- Keymap to open history from chat buffer (default: gh)
             keymap = "gh",
@@ -167,11 +169,13 @@ return {
           --   },
         },
         vectorcode = {
+          enabled = enable_plugin,
           opts = {
             add_tool = true,
           },
         },
         mcphub = {
+          enabled = enable_plugin,
           callback = "mcphub.extensions.codecompanion",
           opts = {
             show_result_in_chat = true, -- Show mcp tool results in chat

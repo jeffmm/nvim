@@ -3,6 +3,22 @@ return {
   ---@type snacks.Config
   opts = {
     terminal = { enabled = true },
+    styles = {
+      terminal = {
+        keys = {
+          term_normal = {
+            "<C-p>",
+            function(self)
+              vim.cmd("stopinsert")
+              self:toggle()
+            end,
+            mode = "t",
+            expr = true,
+            desc = "Ctrl+P to toggle terminal",
+          },
+        },
+      },
+    },
   },
   keys = {
     {
@@ -48,6 +64,12 @@ return {
       end,
       desc = "T[O]p",
       silent = true,
+    },
+    {
+      "<C-p>",
+      function()
+        require("snacks").terminal.toggle()
+      end,
     },
   },
 }

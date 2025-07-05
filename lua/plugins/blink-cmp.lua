@@ -55,6 +55,7 @@ return {
       },
       "fang2hou/blink-copilot",
       "MeanderingProgrammer/render-markdown.nvim",
+      "Kaiser-Yang/blink-cmp-avante",
       -- {
       -- "olimorris/codecompanion.nvim",
       -- lazy = true,
@@ -149,7 +150,7 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "copilot", "lsp", "path", "snippets", "lazydev", "markdown", "buffer" },
+        default = { "avante", "copilot", "lsp", "path", "snippets", "lazydev", "markdown", "buffer" },
         providers = {
           copilot = {
             name = "copilot",
@@ -163,6 +164,13 @@ return {
             fallbacks = { "lsp" },
           },
           lazydev = { module = "lazydev.integrations.blink", score_offset = 50 },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {
+              -- options for blink-cmp-avante
+            },
+          },
         },
         -- per_filetype = {
         -- codecompanion = { "codecompanion" },
