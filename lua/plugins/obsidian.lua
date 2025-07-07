@@ -30,6 +30,12 @@ return {
       "<cmd>ObsidianDailies<cr>",
       desc = "Journal",
     },
+    {
+      "<leader>wl",
+      "<cmd>ObsidianLinkNew<cr>",
+      desc = "New [L]ink",
+      mode = "v",
+    },
   },
   dependencies = {
     -- Required.

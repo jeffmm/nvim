@@ -93,6 +93,34 @@ else
   echo "Installing vectorcode..."
   uv tool install vectorcode
 fi
+if [ ! -d "$HOME/.config/vectorcode" ]; then
+  echo "Creating vectorcode configuration directory..."
+  mkdir -p "$HOME/.config/vectorcode"
+  echo "Setting up vectorcode configuration..."
+  cp "$HOME/.config/nvim/vectorcode_config.json" "$HOME/.config/vectorcode/config.json"
+fi
+if command -v docker > /dev/null 2>&1; then
+  if docker ps | grep -q chromadb; then
+    echo "ChromaDB is already running."
+  else
+    echo "Starting ChromaDB server..."
+    docker compose up -d
+  fi
+else
+  echo "Docker is not installed. Skipping ChromaDB setup."
+  echo "Install docker compose and run the chromadb server with `docker compose up`."
+fi
+if command -v ollama >/dev/null 2>&1; then
+  if ollama list | grep -q nomic-embed-text; then
+    echo "Ollama and nomic-embed-text model are already installed."
+  else
+    echo "Installing nomic-embed-text for embeddings..."
+    ollama pull nomic-embed-text
+  fi
+else
+  echo "Ollama is not installed."
+  echo "Install ollama and pull the 'nomic-embed-text' model for vectorcode embeddings."
+fi
 if command -v tree-sitter >/dev/null 2>&1; then
   echo "tree-sitter is already installed."
 else
