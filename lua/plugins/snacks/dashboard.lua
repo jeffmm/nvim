@@ -36,15 +36,12 @@ return {
       formats = { header = { "%s", align = "center" } },
       sections = {
         { section = "header" },
+        -- section for quote text using fortune.lua
         {
           section = "fortune",
           align = "center",
           padding = 0,
         },
-
-        -- {
-        -- section for quote text using fortune.lua
-        -- },
         { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
         { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },

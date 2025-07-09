@@ -1,17 +1,18 @@
 ## Docker compose file for chromadb:
-#
-## docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma
 
 services:
   chromadb:
     image: chromadb/chroma:0.6.3
     container_name: chromadb
     ports:
-      - "8000:8575"
+      - "8575:8575"
+    expose:
+      - "8575"
     volumes:
       - ~/.local/share/vectorcode/chromadb/:/data/
+      - ./chroma_config.yaml:/config.yaml
     environment:
       - CHROMA_DB_DIR=/data
-      - CHROMA_PORT=8000
+      - CHROMA_HOST_PORT=8575
 
     restart: unless-stopped

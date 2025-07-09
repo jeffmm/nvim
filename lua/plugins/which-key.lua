@@ -81,7 +81,7 @@ return {
         { "<leader>t", group = "[T]oggle" },
         { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
         { "<leader>p", group = "[P]omodoro" },
-        { "<leader>w", group = "[W]iki" },
+        { "<leader>w", group = "[W]iki", mode = { "n", "v" } },
       },
     },
   },

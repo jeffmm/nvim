@@ -25,6 +25,7 @@ return {
         },
       },
       scratch = { enabled = false },
+      terminal = { enabled = false },
     },
     keys = {
       {
@@ -155,7 +156,6 @@ return {
       end
     end,
   },
-  require("plugins.snacks.terminal"),
   require("plugins.snacks.picker"),
   require("plugins.snacks.explorer"),
   require("plugins.snacks.zen"),
